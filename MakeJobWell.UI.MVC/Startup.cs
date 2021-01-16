@@ -19,6 +19,7 @@ namespace MakeJobWell.UI.MVC
         {
             services.AddControllersWithViews();
             services.AddScopedBLL();
+            
 
             services.AddSession(option =>
             {
