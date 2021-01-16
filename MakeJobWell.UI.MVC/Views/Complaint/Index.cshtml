@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-12">
+        <a asp-controller="Complaint" asp-action="Index"><h2 class="tm-section-header tm-section-header-small">Complaints...</h2></a>
+    </div>
+</div>
+<div id="complaintsSet" class="row tm-welcome-row-2" style="margin-bottom:0px">
+    <!--Complaints-->
+
+</div>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:59145/api/Complaint/GetAllComplaints",
+                success: function (response) {
+                    console.log(response);
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Complaint/SetComplaints",
+                        contentType: "application/json; charset=utf8",
+                        data: JSON.stringify(response),
+                        success: function (data) {
+                            console.log(data);
+                            $("#complaintsSet").html(data);
+                        }
+                    })
+                }
+            })
+        })
+    </script>
+}
+
+

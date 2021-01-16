@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MakeJobWell.Core\MakeJobWell.Core.csproj" />
+    <ProjectReference Include="..\MakeJobWell.DAL\MakeJobWell.DAL.csproj" />
+    <ProjectReference Include="..\MakeJobWell.Models\MakeJobWell.Models.csproj" />
+  </ItemGroup>
+
+</Project>

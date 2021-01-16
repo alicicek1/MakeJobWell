@@ -1,0 +1,14 @@
+﻿
+@model List<ComplaintVM>
+
+@foreach (var item in Model)
+{
+    <div class="col-lg-4 tm-dotted-box-container">
+        <article class="tm-dotted-box">
+            <i class="fas fa-3x fa-microscope tm-article-icon"></i>
+            <h3 class="tm-article-title">@item.Title</h3>
+            <p class="tm-article-text">@item.Detail</p>
+            <a class="tm-btn tm-btn-rounded tm-article-link" asp-controller="Complaint" asp-action="ComplaintDetail" asp-route-id="@item.ComplaintID">More Details</a>
+        </article>
+    </div>
+}

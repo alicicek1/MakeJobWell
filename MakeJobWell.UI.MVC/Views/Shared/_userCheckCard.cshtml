@@ -1,0 +1,25 @@
+﻿
+@model UserVM
+
+@if (Model == null)
+{
+    <a class="nav-link tm-nav-link" asp-controller="Login" asp-action="Index">Login/Register</a>
+
+}
+else
+{
+
+    <div class="btn-group dropleft nav-link tm-nav-link">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @Model.FirstName @Model.LastName
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" asp-controller="Profile" asp-action="UserComplaints" asp-route-id="@Model.UserID">Complaints</a>
+            <a class="dropdown-item" asp-controller="Profile" asp-action="ProfilePage" asp-route-id="@Model.UserID">Profile</a>
+            <a class="dropdown-item" asp-controller="Login" asp-action="LogOut">Logout</a>
+        </div>
+    </div>
+
+}
+
+

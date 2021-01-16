@@ -1,0 +1,20 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "twitter-bootstrap@4.5.3",
+      "destination": "wwwroot/vendor/bootstrap/js/",
+      "files": [
+        "js/bootstrap.bundle.min.js"
+      ]
+    },
+    {
+      "library": "feather-icons@4.28.0",
+      "destination": "wwwroot/feather-icons/",
+      "files": [
+        "feather.min.js"
+      ]
+    }
+  ]
+}

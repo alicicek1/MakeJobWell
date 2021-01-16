@@ -1,0 +1,16 @@
+﻿
+@model List<CategoryVM>
+
+@foreach (var item in Model)
+{
+    <div class="col-lg-4 tm-dotted-box-container">
+        <article class="tm-dotted-box">
+            <i class="fas fa-3x fa-binoculars tm-article-icon"></i>
+            <a class="card-link" asp-controller="Category" asp-action="" asp-route-id="@item.CategoryID"><h3 class="tm-article-title">@item.CategoryName</h3></a>
+            <p class="tm-article-text">@item.Overview</p>
+            <a class="tm-btn tm-article-link" asp-controller="Category" asp-action="CategoryDetail" asp-route-id="@item.CategoryID">Go to SubCategories</a>
+        </article>
+    </div>
+
+
+}

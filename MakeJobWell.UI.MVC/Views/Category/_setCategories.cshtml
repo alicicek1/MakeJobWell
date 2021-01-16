@@ -1,0 +1,16 @@
+﻿
+@model List<CategoryVM>
+
+@foreach (var item in Model)
+{
+<article class="col-lg-8 tm-media">
+    <img src="~/img/binocular.jpg" alt="Welcome image" class="img-fluid tm-media-img" />
+    <div class="tm-media-body">
+        <a asp-controller="Category" asp-action="CategoryDetail" asp-route-id="@item.CategoryID" class="tm-article-link"><h3 class="tm-article-title text-uppercase alert-secondary">@item.CategoryName</h3></a>
+        <p>@item.Overview</p>
+        <a class="btn btn-secondary" asp-controller="Category" asp-action="CategoryDetail" asp-route-id="@item.CategoryID">Go to SubCategories</a>
+    </div>
+</article>
+
+
+} 

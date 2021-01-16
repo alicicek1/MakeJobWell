@@ -1,0 +1,11 @@
+﻿@model List<CommentVM>
+
+@foreach (CommentVM item in Model)
+{
+    <div class="card text-white bg-primary col-8 mx-auto" style="margin-bottom:10px">
+        <div class="card-header">@item.UserName</div>
+        <div class="card-bodyt">
+            <p class="card-text text-white float-right">@item.CommentText</p>
+        </div>
+    </div>
+}

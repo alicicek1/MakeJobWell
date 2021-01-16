@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="tm-main-bg tm-about-bg"></div>
+    </div>
+</div>
+
+<!-- Main -->
+<main>
+    <!-- Welcome section -->
+    <section class="tm-welcome">
+        <div class="row">
+            <div class="col-12">
+                <a asp-controller="Category" asp-action="Index"><h2 class="tm-section-header tm-section-header">Categories</h2></a>
+            </div>
+        </div>
+        <div id="categoriesSet" class="row tm-welcome-row-2" style="margin-bottom:0px">
+            <!--categories-->
+        </div>
+        <div class="col-12 float-right">
+            <a asp-controller="Category" asp-action="Index"><h2 class="tm-btn tm-section-header-small float-sm-right">All Categories  >></h2></a>
+        </div>
+        <!----------------------------------------------------------------------------------------------------------------------------->
+        <div class="row">
+            <div class="col-12">
+                <a asp-controller="Company" asp-action="Index"><h2 class="tm-section-header tm-section-header">Companies</h2></a>
+            </div>
+        </div>
+        <div id="companiesSet" class="row tm-welcome-row-2" style="margin-bottom:0px">
+            <!--Companies-->
+
+        </div>
+        <div class="col-12 float-right">
+            <a asp-controller="Company" asp-action="Index"><h2 class="tm-btn tm-section-header-small float-sm-right">All Companies  >></h2></a>
+        </div>
+
+        <!----------------------------------------------------------------------------------------------------------------------------->
+
+        <div class="row">
+            <div class="col-12">
+                <a asp-controller="Complaint" asp-action="Index"><h2 class="tm-section-header tm-section-header">Complaints</h2></a>
+            </div>
+        </div>
+        <div id="complaintsSet" class="row tm-welcome-row-2" style="margin-bottom:0px">
+            <!--Complaints-->
+
+        </div>
+        <div class="col-12 float-right">
+            <a asp-controller="Complaint" asp-action="Index"><h2 class="tm-btn tm-section-header-small float-sm-right" style="margin-bottom:10px">All Complaints  >></h2></a>
+        </div>
+
+        <!-- Featured -->
+        <section class="tm-featured">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="tm-section-header tm-section-header-small mb-3">Partners</h2>
+                </div>
+            </div>
+            <div class="tm-partners mx-auto" style="margin-top:20px">
+                <div>
+                    <img src="~/img/partner-01.png" alt="Partner Image" class="img-fluid">
+                    <img src="~/img/partner-02.png" alt="Partner Image" class="img-fluid">
+                    <img src="~/img/partner-03.png" alt="Partner Image" class="img-fluid">
+                    <img src="~/img/partner-04.png" alt="Partner Image" class="img-fluid">
+                    <img src="~/img/partner-05.png" alt="Partner Image" class="img-fluid">
+                </div>
+            </div>
+        </section>
+
+    </section>
+</main>
+@section scripts{
+    <script>
+
+        function PostingFromAPI(getUrl, postUrl, areaID) {
+            $.ajax({
+                type: "GET",
+                url: getUrl,
+                success: function (response) {
+
+
+                    $.ajax({
+                        type: "POST",
+                        url: postUrl,
+                        contentType: "application/json; charset=utf8",
+                        data: JSON.stringify(response),
+                        success: function (data) {
+                            console.log(data);
+                            $(areaID).html(data);
+                        }
+                    })
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            PostingFromAPI("http://localhost:59145/api/Category/GetCategoriesForHomeIndex", "/Home/SetTopSixCategories", "#categoriesSet");
+            PostingFromAPI("http://localhost:59145/api/Company/GetCompaniesForHomeIndex", "/Home/SetTopSixCompany", "#companiesSet");
+            PostingFromAPI("http://localhost:59145/api/Complaint/GetComplaintForHomeIndex", "/Home/SetTopSixComplaint", "#complaintsSet");
+        })
+
+        
+    </script>
+}

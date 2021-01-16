@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewData["Title"] = "CreateAccount";
+}
+
+@model UserVM
+<!-- Sign up form -->
+<section class="signup">
+    <div class="container">
+        <div class="signup-content">
+            <div class="signup-form">
+                <h2 class="form-title">Sign up</h2>
+                <form method="POST" asp-controller="Login" asp-action="CreateAccount">
+                    <div class="form-group">
+                        <label for="name"><i class="fas fa-user-alt"></i></label>
+                        <input type="text" name="firstName" id="name" asp-for="FirstName" placeholder="First Name" />
+                    </div>
+                    <div class="form-group">
+                        <label for="name"><i class="fas fa-user-alt"></i></label>
+                        <input type="text" name="lastName" id="name" asp-for="LastName" placeholder="Last Name" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email"><i class="far fa-id-card"></i></label>
+                        <input type="email" name="email" id="email" asp-for="Email" placeholder="Email" />
+                    </div>
+                    <div class="form-group">
+                        <label for="username"><i class="far fa-id-badge"></i></label>
+                        <input type="text" name="username" id="username" asp-for="UserName" placeholder="Username" />
+                    </div>
+                    <div class="form-group">
+                        <label for="pass"><i class="fas fa-wrench"></i></label>
+                        <input type="password" name="password" id="pass" asp-for="Password" placeholder="Password" />
+                    </div>
+                    <div class="form-group">
+                        <label for="re-pass"><i class="fas fa-tools"></i></label>
+                        <input type="password" name="passwordRepaet" id="re_pass" asp-for="PasswordRepaet" placeholder="Repeat password" />
+                    </div>
+                    <span>
+                        @ViewBag.Password
+                        @if (ViewBag.Password==null)
+                        {
+                            @ViewBag.Message
+                        }
+                    </span>
+                    <div class="form-group form-button">
+                        <input type="submit" name="signup" id="signup" class="form-submit" value="Register" />
+                    </div>
+                </form>
+            </div>
+            <div class="signup-image">
+                <figure><img src="~/img/signup-image.jpg" alt="sing up image"></figure>
+                <a asp-controller="Login" asp-action="Index" class="signup-image-link">I am already member</a>
+            </div>
+        </div>
+    </div>
+</section>
+

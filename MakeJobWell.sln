@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakeJobWell.Models", "MakeJobWell.Models\MakeJobWell.Models.csproj", "{EC6C5C87-C6DB-4713-8ACD-2699DB20135B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CACAAFA3-9D72-4EB3-95AB-62754FFB1EB2} = {CACAAFA3-9D72-4EB3-95AB-62754FFB1EB2}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakeJobWell.Core", "MakeJobWell.Core\MakeJobWell.Core.csproj", "{CACAAFA3-9D72-4EB3-95AB-62754FFB1EB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakeJobWell.DAL", "MakeJobWell.DAL\MakeJobWell.DAL.csproj", "{23284225-42A9-4440-AFAD-D4D050A14E72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakeJobWell.BLL", "MakeJobWell.BLL\MakeJobWell.BLL.csproj", "{54B3BCAD-0D7B-4215-B9F3-07110072D3A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakeJobWell.UI.MVC", "MakeJobWell.UI.MVC\MakeJobWell.UI.MVC.csproj", "{1D9CAA93-1977-4DFF-83E8-B73103755444}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakeJobWell.Service.WebAPI", "MakeJobWell.Service.WebAPI\MakeJobWell.Service.WebAPI.csproj", "{1BA35736-C948-4288-8049-034ACE8D7D1B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC6C5C87-C6DB-4713-8ACD-2699DB20135B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC6C5C87-C6DB-4713-8ACD-2699DB20135B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC6C5C87-C6DB-4713-8ACD-2699DB20135B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC6C5C87-C6DB-4713-8ACD-2699DB20135B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CACAAFA3-9D72-4EB3-95AB-62754FFB1EB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CACAAFA3-9D72-4EB3-95AB-62754FFB1EB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CACAAFA3-9D72-4EB3-95AB-62754FFB1EB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CACAAFA3-9D72-4EB3-95AB-62754FFB1EB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23284225-42A9-4440-AFAD-D4D050A14E72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23284225-42A9-4440-AFAD-D4D050A14E72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23284225-42A9-4440-AFAD-D4D050A14E72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23284225-42A9-4440-AFAD-D4D050A14E72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54B3BCAD-0D7B-4215-B9F3-07110072D3A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54B3BCAD-0D7B-4215-B9F3-07110072D3A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54B3BCAD-0D7B-4215-B9F3-07110072D3A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54B3BCAD-0D7B-4215-B9F3-07110072D3A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D9CAA93-1977-4DFF-83E8-B73103755444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D9CAA93-1977-4DFF-83E8-B73103755444}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D9CAA93-1977-4DFF-83E8-B73103755444}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D9CAA93-1977-4DFF-83E8-B73103755444}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BA35736-C948-4288-8049-034ACE8D7D1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BA35736-C948-4288-8049-034ACE8D7D1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BA35736-C948-4288-8049-034ACE8D7D1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BA35736-C948-4288-8049-034ACE8D7D1B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {32988AD5-A5AC-4545-8CC6-0CAD4E5538F8}
+	EndGlobalSection
+EndGlobal

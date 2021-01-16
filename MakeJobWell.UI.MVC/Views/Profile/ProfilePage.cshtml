@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewData["Title"] = "ProfilePage";
+}
+
+
+<div class="col-md-12">
+    <div class="col-md-3">
+        <div class="card" id="profileCard">
+
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Full Name</h6>
+                    </div>
+                    <div class="col-sm-8 text-secondary">
+                        Kenneth Valdez
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Email</h6>
+                    </div>
+                    <div class="col-sm-8 text-secondary">
+                        fip@jukmuh.al
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Phone</h6>
+                    </div>
+                    <div class="col-sm-8 text-secondary">
+                        (239) 816-9029
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Mobile</h6>
+                    </div>
+                    <div class="col-sm-8 text-secondary">
+                        (320) 380-4539
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Address</h6>
+                    </div>
+                    <div class="col-sm-8 text-secondary">
+                        Bay Area, San Francisco, CA
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        var id =@ViewContext.RouteData.Values["id"];
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:59145/api/User/GetUserByID/" + id,
+                success: function (response) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Profile/ProfilePage",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(response),
+                        success: function (data) {
+                            $("#profileCard").html(data);
+                        }
+                    })
+                }
+            })
+        })
+    </script>
+}

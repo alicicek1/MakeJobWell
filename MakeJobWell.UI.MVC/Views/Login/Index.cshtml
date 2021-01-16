@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+@model UserVM
+<!-- Sing in  Form -->
+<section class="sign-in">
+    <div class="container">
+        <div class="signin-content">
+            <div class="signin-image">
+                <figure>
+                    <img src="~/img/signin-image.jpg" alt="sing up image">
+                </figure>
+                <a asp-controller="Login" asp-action="CreateAccount" class="signup-image-link">Create an account</a>
+            </div>
+
+            <div class="signin-form">
+                <h2 class="form-title">Sign up</h2>
+                <form method="POST" class="register-form" asp-controller="Login" asp-action="Index" id="login-form">
+                    <div class="form-group">
+                        <label for="your_name"><i class=" far fa-user-circle"></i></label>
+                        <input type="text" asp-for="Email" name="Email" id="email" placeholder="E-mail" />
+                    </div>
+                    <div class="form-group">
+                        <label for="your_pass"><i class="fas fa-wrench"></i></label>
+                        <input type="password" asp-for="Password" name="Password" id="password" placeholder="Password" />
+                    </div>
+                    <p>@ViewBag.Message</p>
+                    <div class="form-group">
+                        <input type="checkbox" name="remember-me" id="remember-me" class="" />
+                        <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+                    </div>
+                    <div class="form-group form-button">
+                        <input type="submit" name="signin" id="signin" class="form-submit" value="Log in" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+

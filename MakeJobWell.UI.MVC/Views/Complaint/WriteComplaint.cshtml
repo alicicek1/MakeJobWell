@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewData["Title"] = "WriteComplaint";
+}
+
+@model ComplaintInsertVM
+
+<div class="row">
+    <div class="col-12">
+        <div class="tm-main-bg tm-contact-bg"></div>
+    </div>
+</div>
+
+<section class="tm-welcome">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="tm-section-header tm-header-floating">Complaint</h2>
+        </div>
+    </div>
+
+    <div class="row tm-welcome-row">
+        <div class="container">
+            <div class="col-lg-6 mb-5 tm-contact-box">
+                <div class="tm-contact-form-wrap">
+                    <form id="contact-form" action="" method="post" class="tm-contact-form">
+
+                        <div class="form-group">
+                            <input id="inpTitle" type="text" class="form-control rounded-0 border-top-0 border-right-0 border-left-0" asp-for="Title" placeholder="Complaint Title" required="">
+                            <span class="text-danger" asp-validation-for="Title"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <p>Company</p>
+                            <select class="form-control" asp-for="CompanyID" asp-items="@Model.Companies"></select>
+                        </div>
+
+                        <div class="form-group">
+                            <textarea id="inpDetail" rows="4" class="form-control rounded-0 border-top-0 border-right-0 border-left-0" asp-for="Detail" placeholder="Complaint Detail" required=""></textarea>
+                            <span class="text-danger" asp-validation-for="Detail"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" id="inpProof" class="form-control rounded-0 border-top-0 border-right-0 border-left-0" asp-for="ComplaintProofFile" placeholder="Complaint Proof Url" required="">
+                            <span class="text-danger" asp-validation-for="ComplaintProofFile"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" id="inpInvoice" class="form-control rounded-0 border-top-0 border-right-0 border-left-0" asp-for="IncoiceProofFile" placeholder="Complaint Invoice Url" required="">
+                            <span class="text-danger" asp-validation-for="IncoiceProofFile"></span>
+                        </div>
+
+                        <div class="form-group mb-0">
+                            <button type="submit" class="btn rounded-0 d-block ml-auto tm-btn-primary">
+                                Post It Now
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+

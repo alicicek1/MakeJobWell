@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container" style="margin-bottom:10px">
+    <div class="row">
+        <div class="col-12">
+
+            <div class="browse-by-catagories catagory-menu d-flex flex-wrap align-items-center mb-70" style="margin-left:20px">
+                <a asp-controller="Company" asp-action="Index">Browse All</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter" asp-route-id="65" > A</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > B</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > C</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > D</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > E</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > F</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > G</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > H</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > I</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > J</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > K</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > L</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > M</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > N</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > O</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > P</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > Q</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > R</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > S</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > T</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > U</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > V</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > W</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > X</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > Y</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > Z</a>
+                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > 0-9</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="row">
+    <div class="col-12">
+        <a asp-controller="Company" asp-action="Index"><h2 class="tm-section-header tm-section-header-small">Companies...</h2></a>
+    </div>
+</div>
+<div id="companiesSet" class="row tm-welcome-row-2" style="margin-bottom:0px">
+    <!--Companies-->
+
+</div>
+
+@section scripts{
+    <script>
+
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:59145/api/Company/GetAllCompanies",
+                success: function (response) {
+                    console.log(response);
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Company/SetCompanies",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(response),
+
+                        success: function (data) {
+                            console.log(data);
+                            $("#companiesSet").html(data);
+                        }
+                    });
+                }
+            });
+        });
+
+        
+    </script>
+}

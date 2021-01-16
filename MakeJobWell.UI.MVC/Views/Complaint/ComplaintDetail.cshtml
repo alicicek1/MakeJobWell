@@ -1,0 +1,103 @@
+﻿@model CommentInsertVM
+@{
+    ViewData["Title"] = "ComplaintDetail";
+}
+<div class="container">
+    <div class="row" style="margin-bottom:30px;margin-top:10px">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 id="complaintTitle" class="card-title"></h5>
+                    <p class="text-danger">Company Name:<h6 id="companyName" class="card-subtitle mb-2 text-muted"></h6></p>
+                    <p id="complaintDetail" class="card-text"></p>
+                    <a href="#" class="card-link float-right"><i class="fa fa-thumbs-up fa-2x" style="color: #fc9999; height:100px; height:10px" aria-hidden="true"></i>Support</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="comment-box add-comment col-12" style="margin-bottom:50px">
+        <span class="commenter-pic">
+            <i class="far fa-comment"></i>
+        </span>
+
+        <input style="margin-bottom:10px" id="commentText" type="text" placeholder="Add a public comment" name="Add Comment" asp-for="CommentText">
+        <button class="btn btn-primary float-right" onclick="InsertComment()">Comment</button>
+        <button class="btn btn-default float-right" onclick="CancelInsert()">Cancel</button>
+
+
+    </div>
+
+    <div class="modal-header" style="margin-bottom:5px">
+        <p>Comments</p>
+    </div>
+    <div id="commentArea">
+
+    </div>
+
+
+</div>
+
+@section scripts{
+    <script>
+        var id =@ViewContext.RouteData.Values["id"];
+
+        $(document).ready(function () {
+
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:59145/api/Complaint/GetComplaintsWComments/" + id,
+                success: function (response) {
+                    console.log(response);
+                    $("#complaintTitle").text(response.title);
+                    $("#complaintDetail").text(response.detail);
+                    $("#companyName").text(response.companyName);
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:59145/api/Comment/GetCommentsByComplaitID/" + id,
+                success: function (response) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Comment/SetComplaints",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(response),
+                        success: function (data) {
+                            $("#commentArea").html(data);
+                        }
+                    })
+                }
+            })
+        })
+
+        function CancelInsert() {
+            document.getElementById("commentText").value=""
+        }
+
+        function InsertComment() {
+
+            var commentInsert = new Object();
+            commentInsert.CommentText = $("#commentText").val();
+            commentInsert.ComplaintID = id;
+            commentInsert.UserID = 0;
+            console.log(commentInsert);
+
+            if (commentInsert!=null) {
+               $.ajax({
+                   type: "POST",
+                   url: "/Comment/WriteComment",
+                   data: JSON.stringify(commentInsert),
+                   contentType: "application/json; charset=utf-8",
+                   dataType: "json",
+                   success: function (response) {
+                        console.log(response);
+
+                   }
+                });
+            }
+
+        }
+    </script>
+}

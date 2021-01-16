@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section class="tm-welcome">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="tm-section-header">Categories</h2>
+        </div>
+    </div>
+    <div class="container">
+        <div id="categoriesSet" class="row tm-welcome-row">
+
+        </div>
+    </div>
+
+
+</section>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:59145/api/Category/GetCategories",
+                success: function (response) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Category/SetAllCategories",
+                        contentType: "application/json; charset=utf8",
+                        data: JSON.stringify(response),
+                        success: function (data) {
+                            $("#categoriesSet").html(data);
+                        }
+                    })
+                }
+            })
+        })
+    </script>
+}

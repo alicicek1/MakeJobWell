@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewData["Title"] = "CategoryDetail";
+}
+
+<div class="row">
+    <diV class="col-12 col-sm-3">
+        <div id="catsList" class="list-group" style="margin-top:10px">
+
+        </div>
+    </diV>
+
+    <div class="col">
+        <div class="category-card-2">
+            <img src="~/img/binocular.jpg" class="img img-responsive" style="" />
+            <div id="catName" class="category-name"></div>
+        </div>
+        <div id="subCategoriesSet" class="row tm-welcome-row-2" style="margin-bottom:0px">
+            <!--categories-->
+        </div>
+    </div>
+</div>
+
+
+
+
+@section scripts{
+    <script>
+
+        $(document).ready(function () {
+            var id =@ViewContext.RouteData.Values["id"];
+
+
+
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:59145/api/Category/GetCategories",
+                success: function (response) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Category/SetCategoriestoList",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(response),
+                        success: function (data) {
+                            $("#catsList").html(data);
+                        }
+                    })
+                }
+
+            })
+
+
+
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:59145/api/Category/GetCategorByID/" + id,
+                success: function (response) {
+                    $("#catName").text(response.categoryName);
+                }
+            });
+
+
+
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:59145/api/SubCategory/GetSubCategoriesWCats/" + id,
+                success: function (response) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Category/SetSubCategories",
+                        contentType: "application/json; charset=utf8",
+                        data: JSON.stringify(response),
+                        success: function (data) {
+                            $("#subCategoriesSet").html(data);
+                        }
+                    })
+                }
+            });
+
+
+
+
+        })
+    </script>
+}
