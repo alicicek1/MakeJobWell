@@ -98,5 +98,10 @@ namespace MakeJobWell.BLL.Concrete.Repositories
         {
             return complaintDAL.GetAll(a => a.CompanyID == id);
         }
+
+        public ICollection<Complaint> GetComplaintsByUserID(int id)
+        {
+            return complaintDAL.GetAll(a => a.UserID == id);
+        }
     }
 }

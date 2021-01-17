@@ -108,35 +108,7 @@ namespace MakeJobWell.Service.WebAPI.Controllers
 
 
 
-        //[HttpPost]
-        //public IActionResult CreateComplaint(ComplaintDTO complaintDTO)
-        //{
-        //    try
-        //    {
-        //        if (complaintDTO == null)
-        //        {
-        //            return BadRequest();
-        //        }
-        //        Complaint complaint = new Complaint();
-
-        //        complaint.ComplaintTitle = complaintDTO.Title;
-        //        complaint.ComplaintDetail = complaintDTO.Detail;
-        //        complaint.Company.ID = 10;
-        //        complaint.ComplaintInvoiceUrl = complaintDTO.IncoiceProofFile;
-        //        complaint.ComplaintProofUrl = complaintDTO.ComplaintProofFile;
-        //        User currentUser = new User();
-        //        HttpContext.Session.Set<User>("currentUser", currentUser);
-        //        complaintInsert.UserID = currentUser.ID;
-        //        complaint.UserID = 1;
-
-        //        complaintBLL.Add(complaint);
-        //        return Ok();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return NotFound(ex.Message);
-        //    }
-        //}
+        
 
     }
 }

@@ -11,5 +11,6 @@ namespace MakeJobWell.BLL.Abstract.IRepositorories
         Complaint GetComplaintCompany(int id);
         ICollection<Complaint> GetComplaintsWCompanies();
         ICollection<Complaint> GetComplaintsViaCompanyID(int id);
+        ICollection<Complaint> GetComplaintsByUserID(int id);
     }
 }
