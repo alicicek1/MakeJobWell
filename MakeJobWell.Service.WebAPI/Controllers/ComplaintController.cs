@@ -105,10 +105,33 @@ namespace MakeJobWell.Service.WebAPI.Controllers
             }
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetComplaintByUserID(int id)
+        {
+            try
+            {
+                List<ComplaintDTO> complaintDTOs = new List<ComplaintDTO>();
+                foreach (Complaint item in complaintBLL.GetComplaintsByUserID(id))
+                {
+                    complaintDTOs.Add(new ComplaintDTO
+                    {
+                        ComplaintID = item.ID,
+                        Title = item.ComplaintTitle,
+                        Detail = item.ComplaintTitle,
+                        CompanyID = item.CompanyID
+                    });
+
+                }
+                return Ok(complaintDTOs);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
 
 
 
-        
 
     }
 }

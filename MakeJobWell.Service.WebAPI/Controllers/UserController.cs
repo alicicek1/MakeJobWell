@@ -31,7 +31,8 @@ namespace MakeJobWell.Service.WebAPI.Controllers
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
                 UserName = user.UserName,
-                Password = user.Password
+                Password = user.Password,
+                Gender = user.Gender
             };
             return Ok(userDTO);
         }

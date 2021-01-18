@@ -24,5 +24,14 @@ namespace MakeJobWell.UI.MVC.Controllers
             }
             return PartialView("_profileCard", user);
         }
+
+        public IActionResult SetComplaintsForUser([FromBody] List<ComplaintVM> complaints)
+        {
+            if (complaints == null)
+            {
+                ViewBag.Message = "Complaints cannot found!";
+            }
+            return PartialView("_setComplaints", complaints);
+        }
     }
 }
