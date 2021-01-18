@@ -14,7 +14,6 @@ else
             @Model.FirstName @Model.LastName
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" asp-controller="Profile" asp-action="UserComplaints" asp-route-id="@Model.UserID">Complaints</a>
             <a class="dropdown-item" asp-controller="Profile" asp-action="ProfilePage" asp-route-id="@Model.UserID">Profile</a>
             <a class="dropdown-item" asp-controller="Login" asp-action="LogOut">Logout</a>
         </div>

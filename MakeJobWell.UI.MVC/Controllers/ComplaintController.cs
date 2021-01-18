@@ -96,7 +96,16 @@ namespace MakeJobWell.UI.MVC.Controllers
             };
             if (complaint != null)
             {
-                complaintBLL.Add(complaint);
+                try
+                {
+                    complaintBLL.Add(complaint);
+                    return RedirectToAction("Index", "Home");
+                }
+                catch (Exception)
+                {
+                    throw new Exception();
+                }
+
             }
 
             return View();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MakeJobWell.Models.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,5 +15,6 @@ namespace MakeJobWell.Service.WebAPI.Models.SelfEntities
         public string Password { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
+        public Gender Gender { get; set; }
     }
 }
