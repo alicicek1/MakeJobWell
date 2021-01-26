@@ -69,12 +69,12 @@ namespace MakeJobWell.BLL.Concrete.Repositories
 
         public Complaint Get(int id)
         {
-            return complaintDAL.Get(a => a.ID == id);
+            return complaintDAL.Get(a => a.ID == id && a.IsActive == true);
         }
 
         public ICollection<Complaint> GetAll()
         {
-            return complaintDAL.GetAll();
+            return complaintDAL.GetAll(a => a.IsActive == true);
         }
 
 
@@ -87,7 +87,7 @@ namespace MakeJobWell.BLL.Concrete.Repositories
 
         public Complaint GetComplaintCompany(int id)
         {
-            return complaintDAL.Get(a => a.ID == id, a => a.Company);
+            return complaintDAL.Get(a => a.ID == id && a.IsActive == true, a => a.Company);
         }
         public ICollection<Complaint> GetComplaintsWCompanies()
         {
@@ -96,12 +96,12 @@ namespace MakeJobWell.BLL.Concrete.Repositories
 
         public ICollection<Complaint> GetComplaintsViaCompanyID(int id)
         {
-            return complaintDAL.GetAll(a => a.CompanyID == id);
+            return complaintDAL.GetAll(a => a.CompanyID == id && a.IsActive == true);
         }
 
         public ICollection<Complaint> GetComplaintsByUserID(int id)
         {
-            return complaintDAL.GetAll(a => a.UserID == id);
+            return complaintDAL.GetAll(a => a.UserID == id && a.IsActive == true);
         }
     }
 }

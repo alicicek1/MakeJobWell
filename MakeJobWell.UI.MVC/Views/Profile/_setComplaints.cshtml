@@ -8,7 +8,11 @@
             <i class="fas fa-3x fa-microscope tm-article-icon"></i>
             <h3 class="tm-article-title">@item.Title</h3>
             <p class="tm-article-text">@item.Detail</p>
-            <a class="tm-btn tm-btn-rounded tm-article-link" asp-controller="Complaint" asp-action="ComplaintDetail" asp-route-id="@item.ComplaintID">More Details</a>
+            <div class="col-12">
+                <a class="btn btn-danger" @*asp-controller="Complaint" asp-action="DeleteComplaint" asp-route-id="@item.ComplaintID"*@ onclick="Delete(@item.ComplaintID)">Delete</a>
+                <a class="tm-btn tm-btn-rounded tm-article-link" asp-controller="Complaint" asp-action="ComplaintDetail" asp-route-id="@item.ComplaintID">More Details</a>
+            </div>
+
         </article>
     </div>
 }

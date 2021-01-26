@@ -33,5 +33,10 @@ namespace MakeJobWell.UI.MVC.Controllers
             }
             return PartialView("_setComplaints", complaints);
         }
+
+        public IActionResult UpdateProfile()
+        {
+            return View();
+        }
     }
 }

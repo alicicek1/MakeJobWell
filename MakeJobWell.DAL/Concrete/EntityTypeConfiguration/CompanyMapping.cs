@@ -23,7 +23,7 @@ namespace MakeJobWell.DAL.Concrete.EntityTypeConfiguration
             builder.Property(a => a.NumberofComplaints).HasDefaultValueSql("0");
             builder.Property(a => a.NumberofIssueResolved).HasDefaultValueSql("0");
             builder.Property(a => a.Response).HasDefaultValueSql("0");
-            builder.Property(a => a.TrustCode).HasPrecision(2, 3);
+            builder.Property(a => a.TrustCode).HasPrecision(2, 2);
 
             //builder.Property(a => a.SocialAccounts).ValueGeneratedOnAddOrUpdate();
             builder.HasMany(a => a.SocialAccounts).WithOne(a => a.Company);

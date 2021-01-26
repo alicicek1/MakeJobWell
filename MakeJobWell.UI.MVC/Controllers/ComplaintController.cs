@@ -117,5 +117,11 @@ namespace MakeJobWell.UI.MVC.Controllers
         }
 
 
+        public IActionResult DeleteComplaint(int id)
+        {
+            complaintBLL.Delete(complaintBLL.Get(id));
+            return RedirectToAction("ProfilePage", "Profile");
+        }
+
     }
 }

@@ -226,6 +226,7 @@ body {
     background: #f8f8f8;
     font-weight: 400;
     font-family: Poppins;
+    margin-top: 20px;
 }
 
 .container {
@@ -710,3 +711,5 @@ label.valid {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+

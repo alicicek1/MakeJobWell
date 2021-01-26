@@ -6,7 +6,7 @@
 
 
 <div class="row" id="profileCard">
-   
+
 </div>
 <hr />
 <div class="container">
@@ -57,7 +57,36 @@
                         }
                     })
                 }
-            })
+            });
         })
+
+        function Delete(idComp) {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:59145/api/Complaint/DeactivateComplaint/" + idComp,
+                success: function () {
+
+                    $.ajax({
+                        type: "GET",
+                        url: "http://localhost:59145/api/Complaint/GetComplaintByUserID/" + id,
+                        success: function (response) {
+                            console.log(response);
+
+                            $.ajax({
+                                type: "POST",
+                                url: "/Profile/SetComplaintsForUser",
+                                contentType: "application/json; charset=utf8",
+                                data: JSON.stringify(response),
+                                success: function (data) {
+                                    console.log(data);
+                                    $("#complaintsSet").html(data);
+                                }
+                            })
+                        }
+                    });
+                    alert("Complaint deleted!");
+                }
+            })
+        }
     </script>
 }

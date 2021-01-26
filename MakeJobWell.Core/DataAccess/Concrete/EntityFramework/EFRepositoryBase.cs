@@ -45,13 +45,13 @@ namespace MakeJobWell.Core.DataAccess.Concrete.EntityFramework
             if (filter == null)
             {
                 return context.Set<TEntity>().MyInclude(includes).ToList();
-            }            
+            }
             return context.Set<TEntity>().Where(filter).MyInclude(includes).ToList();
         }
 
         public ICollection<TEntity> GetTopSix()
         {
-            return context.Set<TEntity>().Take(6).ToList();
+            return context.Set<TEntity>().OrderByDescending(a => a.ID).Take(6).ToList();
         }
 
     }

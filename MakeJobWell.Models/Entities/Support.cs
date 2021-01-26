@@ -9,6 +9,7 @@ namespace MakeJobWell.Models.Entities
     {
         public int UserID { get; set; }
         public int ComplaintID { get; set; }
+        public int SupportCounter { get; set; }
         public User User { get; set; }
         public Complaint Complaint { get; set; }
     }

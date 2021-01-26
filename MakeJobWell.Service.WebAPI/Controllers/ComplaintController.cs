@@ -24,7 +24,7 @@ namespace MakeJobWell.Service.WebAPI.Controllers
         private List<ComplaintDTO> GetComplaints(ICollection<Complaint> complaints)
         {
             List<ComplaintDTO> complaintDTOs = new List<ComplaintDTO>();
-            foreach (Complaint item in complaintBLL.GetAll())
+            foreach (Complaint item in complaints)
             {
                 complaintDTOs.Add(new ComplaintDTO
                 {
@@ -130,8 +130,12 @@ namespace MakeJobWell.Service.WebAPI.Controllers
             }
         }
 
-
-
+        [HttpGet("{id}")]
+        public IActionResult DeactivateComplaint(int id)
+        {
+            complaintBLL.Delete(complaintBLL.Get(id));
+            return Ok();
+        }
 
     }
 }
