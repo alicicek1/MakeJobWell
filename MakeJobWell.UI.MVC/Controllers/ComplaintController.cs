@@ -1,4 +1,5 @@
-﻿using MakeJobWell.BLL.Abstract.IRepositorories;
+﻿using FluentValidation;
+using MakeJobWell.BLL.Abstract.IRepositorories;
 using MakeJobWell.Models.Entities;
 using MakeJobWell.UI.MVC.Helper;
 using MakeJobWell.UI.MVC.Models.ViewModels;
@@ -15,10 +16,12 @@ namespace MakeJobWell.UI.MVC.Controllers
     {
         IComplaintBLL complaintBLL;
         ICompanyBLL companyBLL;
-        public ComplaintController(IComplaintBLL bLL, ICompanyBLL bLL1)
+        private readonly IValidator<Complaint> _compValidator;
+        public ComplaintController(IComplaintBLL bLL, ICompanyBLL bLL1, IValidator<Complaint> validator)
         {
             complaintBLL = bLL;
             companyBLL = bLL1;
+            _compValidator = validator;
         }
         public IActionResult Index()
         {
@@ -80,34 +83,36 @@ namespace MakeJobWell.UI.MVC.Controllers
         [HttpPost]
         public IActionResult WriteComplaint(ComplaintInsertVM complaintInsert)
         {
-            User currentUser = HttpContext.Session.Get<User>("currentUser");
-            if (currentUser == null)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("Index", "Login");
-            }
-            //HttpContext.Session.Set<User>("currentUser", currentUser);
-            //complaintInsert.UserID = currentUser.ID;
-            Complaint complaint = new Complaint()
-            {
-                ComplaintTitle = complaintInsert.Title,
-                ComplaintDetail = complaintInsert.Detail,
-                UserID = currentUser.ID,
-                CompanyID = complaintInsert.CompanyID
-            };
-            if (complaint != null)
-            {
-                try
+                User currentUser = HttpContext.Session.Get<User>("currentUser");
+                if (currentUser == null)
                 {
-                    complaintBLL.Add(complaint);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Login");
                 }
-                catch (Exception)
+                //HttpContext.Session.Set<User>("currentUser", currentUser);
+                //complaintInsert.UserID = currentUser.ID;
+                Complaint complaint = new Complaint()
                 {
-                    throw new Exception();
+                    ComplaintTitle = complaintInsert.Title,
+                    ComplaintDetail = complaintInsert.Detail,
+                    UserID = currentUser.ID,
+                    CompanyID = complaintInsert.CompanyID
+                };
+                if (complaint != null)
+                {
+                    try
+                    {
+                        complaintBLL.Add(complaint);
+                        return RedirectToAction("Index", "Home");
+                    }
+                    catch (Exception)
+                    {
+                        throw new Exception();
+                    }
+
                 }
-
             }
-
             return View();
         }
 

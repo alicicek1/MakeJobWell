@@ -10,7 +10,7 @@ namespace MakeJobWell.BLL.Concrete.EntityValidation
     {
         public CategoryValidator()
         {
-            RuleFor(a => a.CategoryName).NotEmpty().Length(2, 50).WithMessage("Category name needs to be between 2 and 50 character.");
+            RuleFor(a => a.CategoryName).NotEmpty().Length(2, 50).WithMessage("{PropertyName} needs to be between {MinLenght} and {MaxLenght} character.");
             RuleFor(a => a.Description).NotEmpty().Length(10, 250).WithMessage("Category description needs to be between 10 and 250 character.");
         }
     }

@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using MakeJobWell.BLL.Concrete.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -17,9 +18,10 @@ namespace MakeJobWell.UI.MVC
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddFluentValidation();
             services.AddScopedBLL();
-            
+            services.AddScoped();
+
 
             services.AddSession(option =>
             {
