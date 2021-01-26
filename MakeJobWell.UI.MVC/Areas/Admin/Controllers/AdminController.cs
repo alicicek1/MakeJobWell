@@ -1,5 +1,6 @@
 ﻿using MakeJobWell.BLL.Abstract.IRepositorories;
 using MakeJobWell.Models.Entities;
+using MakeJobWell.UI.MVC.Helper;
 using MakeJobWell.UI.MVC.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 namespace MakeJobWell.UI.MVC.Areas.AdminsArea.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         IUserBLL userBLL;
@@ -20,17 +21,22 @@ namespace MakeJobWell.UI.MVC.Areas.AdminsArea.Controllers
         {
             userBLL = bLL;
         }
-        [HttpGet("{id}")]
-        public IActionResult Index(int id)
+
+        public IActionResult Index()
         {
-            User user = userBLL.Get(id);
-            UserVM userVM = new UserVM()
+            User currentUser = HttpContext.Session.Get<User>("currentUser");
+            if (currentUser == null)
             {
-                FirstName=user.FirstName,
-                LastName=user.LastName,
-                Email=user.Email
+                return PartialView("_userCheckCard");
+            }
+            UserVM user = new UserVM()
+            {
+                FirstName = currentUser.FirstName,
+                LastName = currentUser.LastName,
+                Email = currentUser.Email,
+                UserID = currentUser.ID
             };
-            return View(userVM);
+            return View(user);
         }
     }
 }
