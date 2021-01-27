@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using MakeJobWell.BLL.Concrete.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -18,7 +19,10 @@ namespace MakeJobWell.Service.WebAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation(opt =>
+            {
+                opt.RegisterValidatorsFromAssemblyContaining<Startup>();
+            });
             services.AddScopedBLL();
 
             services.AddCors(options => options.AddPolicy("myPolicy", configurePolicy =>
