@@ -2,21 +2,19 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<section class="tm-welcome">
-    <div class="row">
-        <div class="col-12">
-            <h2 class="tm-section-header">Categories</h2>
-        </div>
-    </div>
-    <div class="container">
-        <div id="categoriesSet" class="row tm-welcome-row">
-
-        </div>
-    </div>
-
-
-</section>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">CategoryName</th>
+                <th class="btn btn-outline-success, float-right">Create New Category</th>
+            </tr>
+        </thead>
+        <tbody id="categoriesSet">
+        </tbody>
+    </table>
+</div>
 
 @section scripts{
     <script>
@@ -28,7 +26,7 @@
 
                     $.ajax({
                         type: "POST",
-                        url: "/Category/SetAllCategories",
+                        url: "/Admin/AdminCategory/SetAllCategories",
                         contentType: "application/json; charset=utf8",
                         data: JSON.stringify(response),
                         success: function (data) {
@@ -36,7 +34,8 @@
                         }
                     })
                 }
-            });
+            })
         })
     </script>
 }
+

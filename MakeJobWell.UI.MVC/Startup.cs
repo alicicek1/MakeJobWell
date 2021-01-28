@@ -43,13 +43,14 @@ namespace MakeJobWell.UI.MVC
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapAreaControllerRoute(
                     name: "adminArea",
                     areaName: "Admin",
-                    pattern: "{area=Admin}/{controller=Admin}/{action=Index}/{id?}");
+                    pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
                 //endpoints.MapControllerRoute(
                 //    name: "adminArea",
                 //    pattern: "{area=Admin}/{controller=Admin}/{action=Index}/{id?}");

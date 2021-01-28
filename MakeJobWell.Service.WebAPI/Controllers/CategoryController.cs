@@ -19,7 +19,7 @@ namespace MakeJobWell.Service.WebAPI.Controllers
         {
             categoryBLL = category;
         }
-
+        [HttpGet]
         private List<CategoryDTO> GetCategories(ICollection<Category> categories)
         {
             List<CategoryDTO> categoryDTOs = new List<CategoryDTO>();
