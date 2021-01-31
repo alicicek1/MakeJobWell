@@ -1,5 +1,4 @@
 ﻿using MakeJobWell.UI.MVC.Models.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ using System.Threading.Tasks;
 namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class AdminCategoryController : Controller
+    public class AdminSubCategoryController : Controller
     {
         public IActionResult Index()
         {
@@ -17,13 +16,13 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult SetCategories([FromBody] List<CategoryVM> categories)
+        public IActionResult SetSubCategories([FromBody] List<SubCategoryVM> categories)
         {
-            if (categories==null)
+            if (categories == null)
             {
-                ViewBag.Message = "Categories not found";
+                ViewBag.Message = "SubCategories not found";
             }
-            return PartialView("_setCategories", categories);
+            return PartialView("_setSubCategories", categories);
 
         }
     }

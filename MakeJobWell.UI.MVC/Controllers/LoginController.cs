@@ -60,7 +60,7 @@ namespace MakeJobWell.UI.MVC.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Mesaage = ($"Something wnet wrong. /{0}", ex);
+                ViewBag.Mesaage = ($"Something went wrong. /{0}", ex);
             }
 
             return View();

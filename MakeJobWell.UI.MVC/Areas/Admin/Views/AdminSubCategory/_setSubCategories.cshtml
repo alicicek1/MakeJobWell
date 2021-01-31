@@ -1,0 +1,11 @@
+﻿@model List<SubCategoryVM>
+@foreach (SubCategoryVM item in Model)
+{
+    <tr>
+        <td>@item.SubCategoryID</td>
+        <td>@item.SubCategoryName</td>
+        <td>@item.CatName</td>
+        <td><a class="btn btn-warning">Update</a></td>
+        <td><a class="btn btn-danger">Delete</a></td>
+    </tr>
+}

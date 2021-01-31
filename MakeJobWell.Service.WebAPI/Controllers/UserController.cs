@@ -36,5 +36,19 @@ namespace MakeJobWell.Service.WebAPI.Controllers
             };
             return Ok(userDTO);
         }
+
+        [HttpGet]
+        public IActionResult GetAllUser()
+        {
+            try
+            {
+                return Ok(userBLL.GetAll());
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
     }
 }

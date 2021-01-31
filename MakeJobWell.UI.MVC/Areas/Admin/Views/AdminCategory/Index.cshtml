@@ -7,12 +7,19 @@
         <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">CategoryName</th>
-                <th class="btn btn-outline-success, float-right">Create New Category</th>
+                <th scope="col">Category Name</th>
             </tr>
         </thead>
-        <tbody id="categoriesSet">
+        <tbody id="cateSet">
         </tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th><a class="btn btn-success float-right">Add New Category</a></th>
+            </tr>
+        </tfoot>
     </table>
 </div>
 
@@ -20,17 +27,17 @@
     <script>
         $(document).ready(function () {
             $.ajax({
-                type: "GET",
+                type: "get",
                 url: "http://localhost:59145/api/Category/GetCategories",
                 success: function (response) {
 
                     $.ajax({
-                        type: "POST",
-                        url: "/Admin/AdminCategory/SetAllCategories",
-                        contentType: "application/json; charset=utf8",
+                        type: "post",
+                        url: "/Admin/AdminCategory/SetCategories",
                         data: JSON.stringify(response),
+                        contentType: "application/json; charset=utf-8",
                         success: function (data) {
-                            $("#categoriesSet").html(data);
+                            $("#cateSet").html(data);
                         }
                     })
                 }
@@ -38,4 +45,3 @@
         })
     </script>
 }
-

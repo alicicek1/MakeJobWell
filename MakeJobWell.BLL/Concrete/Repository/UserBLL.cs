@@ -75,6 +75,13 @@ namespace MakeJobWell.BLL.Concrete.Repositories
             entity.UserRole = UserRole.Standart;
             userDAL.Add(entity);
         }
+        public void AddAdmin(User entity)
+        {
+            Check(entity);
+            entity.ActivationCode = Guid.NewGuid();
+            entity.UserRole = UserRole.Admin;
+            userDAL.Add(entity);
+        }
         public void Update(User entity)
         {
             Check(entity);

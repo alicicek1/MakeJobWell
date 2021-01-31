@@ -28,8 +28,8 @@ namespace MakeJobWell.Service.WebAPI.Controllers
                 {
                     SubCategoryID = item.ID,
                     SubCategoryName = item.CategoryName,
-                    Overview=item.Description,
-                    CatName=item.Category.CategoryName
+                    Overview = item.Description,
+                    CatName = item.Category.CategoryName
                 });
             }
             return subCategoryDTOs;
@@ -41,6 +41,18 @@ namespace MakeJobWell.Service.WebAPI.Controllers
             try
             {
                 return Ok(GetSubCategories(subCategoryBLL.GetAll()));
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex);
+            }
+        }
+
+        public IActionResult GetAllSubCategoriesForAdmin()
+        {
+            try
+            {
+                return Ok(GetSubCategories(subCategoryBLL.GetAllWithCats()));
             }
             catch (Exception ex)
             {
