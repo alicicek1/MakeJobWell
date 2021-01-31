@@ -80,5 +80,10 @@ namespace MakeJobWell.BLL.Concrete.Repositories
             return subCategoryDAL.GetAll(a => a.CategoryID == id, a => a.Category);
         }
 
+        public ICollection<SubCategory> GetAllWithCats()
+        {
+            return subCategoryDAL.GetAll(null, x => x.Category);
+        }
+
     }
 }

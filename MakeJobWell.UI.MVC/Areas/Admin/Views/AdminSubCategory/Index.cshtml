@@ -3,5 +3,49 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">SubCategory Name</th>
+                <th scope="col">Category Name</th>
+            </tr>
+        </thead>
+        <tbody id="subCateSet">
+        </tbody>
+        <tfoot> 
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th><a class="btn btn-success float-right">Add New SubCategory</a></th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "get",
+                url: "http://localhost:59145/api/SubCategory/GetAllSubCategoriesForAdmin",
+                success: function (response) {
+
+                    $.ajax({
+                        type: "post",
+                        url: "/Admin/AdminSubCategory/SetSubCategories",
+                        data: JSON.stringify(response),
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            $("#subCateSet").html(data);
+                        }
+                    })
+                }
+            })
+        })
+    </script>
+}
 

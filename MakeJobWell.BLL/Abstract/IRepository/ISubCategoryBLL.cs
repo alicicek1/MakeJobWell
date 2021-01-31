@@ -8,5 +8,6 @@ namespace MakeJobWell.BLL.Abstract.IRepositorories
     public interface ISubCategoryBLL : IBaseBLL<SubCategory>
     {
         ICollection<SubCategory> GetSubCategoriesByCatID(int id);
+        ICollection<SubCategory> GetAllWithCats();
     }
 }

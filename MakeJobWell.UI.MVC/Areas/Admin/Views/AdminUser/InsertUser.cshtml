@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewData["Title"] = "InsertUser";
+}
+@model UserVM
+<div class="container col-lg-6 offset-3">
+    <div class="card">
+        <div class="card-header text-center">
+            INSERT
+        </div>
+        <div class="card-body">
+            <form href="/Admin/AdminUser/InsertUser" method="post" class="form-group">
+                <div class="form-group">
+                    <label asp-for="FirstName"></label>
+                    <input class="form-control" asp-for="FirstName" />
+                    <span class="text-danger" asp-validation-for="FirstName"></span>
+
+                    <label asp-for="LastName"></label>
+                    <input class="form-control" asp-for="LastName" />
+                    <span class="text-danger" asp-validation-for="LastName"></span>
+
+                    <label asp-for="Email"></label>
+                    <input class="form-control" asp-for="Email" />
+                    <span class="text-danger" asp-validation-for="Email"></span>
+
+                    <label asp-for="UserName"></label>
+                    <input class="form-control" asp-for="UserName" />
+                    <span class="text-danger" asp-validation-for="UserName"></span>
+
+                    <label asp-for="Password"></label>
+                    <input class="form-control" asp-for="Password" />
+                    <span class="text-danger" asp-validation-for="Password"></span>
+
+                    <label asp-for="PasswordRepaet"></label>
+                    <input class="form-control" asp-for="PasswordRepaet" />
+                    <span class="text-danger" asp-validation-for="PasswordRepaet"></span>
+
+                    <label asp-for="PhoneNumber"></label>
+                    <input class="form-control" asp-for="PhoneNumber" />
+                    <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+
+                    <label asp-for="Address"></label>
+                    <input class="form-control" asp-for="Address" />
+                    <span class="text-danger" asp-validation-for="Address"></span>
+
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success">Add</button>
+                </div>
+            </form>
+        </div>
+        @if (ViewBag.IsSuccess != null)
+        {
+            <div class="card-footer">
+                @if (ViewBag.IsSuccess)
+                {
+                    <label class="text-info">Registration Successful</label>
+                    <br />
+                    <a asp-controller="AdminUser" asp-action="Index" class="btn btn-link">Return to Departments</a>
+                }
+                else
+                {
+                    <label class="text-danger">Kayıt Başarısız</label>
+                }
+            </div>
+        }
+    </div>
+</div>
+

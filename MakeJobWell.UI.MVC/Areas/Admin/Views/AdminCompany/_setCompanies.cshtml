@@ -1,0 +1,10 @@
+﻿@model List<CompanyVM>
+@foreach (CompanyVM item in Model)
+{
+    <tr>
+        <td>@item.CompanyID</td>
+        <td>@item.CompanyName</td>
+        <td><a class="btn btn-warning">Update</a></td>
+        <td><a class="btn btn-danger">Delete</a></td>
+    </tr>
+}
