@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentValidation;
 
 namespace MakeJobWell.UI.MVC
 {
@@ -18,7 +19,11 @@ namespace MakeJobWell.UI.MVC
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews().AddFluentValidation();
+            services.AddControllersWithViews().AddFluentValidation(option =>
+            {
+                option.RegisterValidatorsFromAssemblyContaining<Startup>();
+            });
+
             services.AddScopedBLL();
             services.AddScoped();
 
