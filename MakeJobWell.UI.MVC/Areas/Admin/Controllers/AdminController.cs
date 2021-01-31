@@ -38,5 +38,11 @@ namespace MakeJobWell.UI.MVC.Areas.AdminsArea.Controllers
             };
             return View(user);
         }
+
+        public IActionResult LogOut()
+        {
+            HttpContext.Session.Remove("currentUser");
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

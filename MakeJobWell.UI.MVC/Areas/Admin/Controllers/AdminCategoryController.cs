@@ -26,5 +26,10 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
             return PartialView("_setCategories", categories);
 
         }
+
+        public IActionResult InsertCategory()
+        {
+            return View();
+        }
     }
 }
