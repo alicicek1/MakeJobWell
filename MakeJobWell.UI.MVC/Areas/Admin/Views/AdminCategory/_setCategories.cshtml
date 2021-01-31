@@ -1,0 +1,12 @@
+﻿@model List<CategoryVM>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>@item.CategoryID</td>
+        <td>@item.CategoryName</td>
+        <td><a class="btn btn-link" href="/Admin/AdminCategory/SetAllSubCategories">Go SubCategory</a></td>
+        <td><a class="btn btn-info" href="/Admin/AdminCategory/Update">Update</a></td>
+        <td><a class="btn btn-danger" href="/Admin/AdminCategory/Delete">Delete</a></td>
+    </tr>
+}
