@@ -76,7 +76,7 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
             {
                 throw new Exception(ex.Message);
             }
-            return View();
+            return View("Index");
         }
     }
 }

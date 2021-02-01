@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewData["Title"] = "InsertSubCategory";
+}
+
+@model SubCategoryVM
+<div class="container col-lg-6 offset-3">
+    <div class="card">
+        <div class="card-header text-center">
+            INSERT
+        </div>
+        <div class="card-body">
+            <form href="/Admin/AdminSubCategory/InsertSubCategory" method="post" class="form-group">
+                <div class="form-group">
+                    <select class="form-control" asp-for="CatID" asp-items="@Model.Categories"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SubCategoryName"></label>
+                    <input class="form-control" asp-for="SubCategoryName" />
+                    <span class="text-danger" asp-validation-for="SubCategoryName"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Overview">Overview:</label>
+                    <input class="form-control" asp-for="Overview" />
+                    <span class="text-danger" asp-validation-for="Overview"></span>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success">Add</button>
+                </div>
+            </form>
+        </div>
+        @if (ViewBag.IsSuccess != null)
+        {
+            <div class="card-footer">
+                @if (ViewBag.IsSuccess)
+                {
+                    <label class="text-info">Successful Registration</label>
+                    <br />
+                    <a asp-controller="Department" asp-action="Index" class="btn btn-link">Return to Index</a>
+                }
+
+                else
+                {
+                    <label class="text-danger">Registration Failed</label>
+                }
+            </div>
+        }
+
+    </div>
+</div>
+
+
