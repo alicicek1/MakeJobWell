@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FluentValidation;
+using Smidge;
 
 namespace MakeJobWell.UI.MVC
 {
@@ -24,9 +26,9 @@ namespace MakeJobWell.UI.MVC
                 option.RegisterValidatorsFromAssemblyContaining<Startup>();
             });
 
+            
             services.AddScopedBLL();
             services.AddScoped();
-
 
             services.AddSession(option =>
             {

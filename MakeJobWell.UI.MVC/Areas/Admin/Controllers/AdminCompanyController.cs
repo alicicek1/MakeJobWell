@@ -44,7 +44,7 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
                 {
                     Text = item.CategoryName,
                     Value = item.ID.ToString()
-                }); 
+                });
             }
             if (company != null)
             {
@@ -82,6 +82,50 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
             return View("Index");
         }
 
+        public IActionResult UpdateCompany(int id)
+        {
+            Company company = companyBLL.Get(id);
+            return View(GetCompanyVM(company));
+        }
+
+        [HttpPost]
+        public IActionResult UpdateCompany(CompanyVM companyVM, int id)
+        {
+            Company company = companyBLL.Get(id);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    company.CompanyName = companyVM.CompanyName;
+                    company.Overview = companyVM.Overview;
+                    company.Location = companyVM.Location;
+                    company.WebSite = companyVM.WebSite;
+                    company.SubCategoryID = companyVM.SubCatID;
+
+                    if (company != null)
+                    {
+                        companyBLL.Update(company);
+                        ViewBag.IsSuccess = true;
+                    }
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception)
+            {
+                ViewBag.IsSuccess = false;
+            }
+            return View();
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            companyBLL.Delete(id);
+            return View("Index");
+        }
 
     }
 }

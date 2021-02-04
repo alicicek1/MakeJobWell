@@ -9,33 +9,33 @@
 
             <div class="browse-by-catagories catagory-menu d-flex flex-wrap align-items-center mb-70" style="margin-left:20px">
                 <a asp-controller="Company" asp-action="Index">Browse All</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter" asp-route-id="65" > A</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > B</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > C</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > D</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > E</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > F</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > G</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > H</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > I</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > J</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > K</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > L</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > M</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > N</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > O</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > P</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > Q</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > R</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > S</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > T</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > U</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > V</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > W</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > X</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > Y</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > Z</a>
-                <a asp-controller="Company" asp-action="CompaniesByFirstLetter"  > 0-9</a>
+                <a onclick="myFunction('a')"> A</a>
+                <a onclick="myFunction('b')"> B</a>
+                <a onclick="myFunction('c')"> C</a>
+                <a onclick="myFunction('d')"> D</a>
+                <a onclick="myFunction('e')"> E</a>
+                <a onclick="myFunction('f')"> F</a>
+                <a onclick="myFunction('g')"> G</a>
+                <a onclick="myFunction('h')"> H</a>
+                <a onclick="myFunction('i')"> I</a>
+                <a onclick="myFunction('j')"> J</a>
+                <a onclick="myFunction('k')"> K</a>
+                <a onclick="myFunction('l')"> L</a>
+                <a onclick="myFunction('m')"> M</a>
+                <a onclick="myFunction('n')"> N</a>
+                <a onclick="myFunction('o')"> O</a>
+                <a onclick="myFunction('p')"> P</a>
+                <a onclick="myFunction('q')"> Q</a>
+                <a onclick="myFunction('r')"> R</a>
+                <a onclick="myFunction('s')"> S</a>
+                <a onclick="myFunction('t')"> T</a>
+                <a onclick="myFunction('u')"> U</a>
+                <a onclick="myFunction('v')"> V</a>
+                <a onclick="myFunction('w')"> W</a>
+                <a onclick="myFunction('x')"> X</a>
+                <a onclick="myFunction('y')"> Y</a>
+                <a onclick="myFunction('z')"> Z</a>
+                <a onclick="myFunction('0')"> 0-9</a>
             </div>
 
         </div>
@@ -44,7 +44,7 @@
 
 
 
-
+<p id="demo" hidden></p>
 
 <div class="row">
     <div class="col-12">
@@ -81,6 +81,28 @@
             });
         });
 
-        
+        function myFunction(name) {
+           
+
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:59145/api/Company/GetAllCompaniesByFLetter/" + name,
+                success: function (response) {
+                    console.log(response);
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Company/SetCompanies",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(response),
+
+                        success: function (data) {
+                            console.log(data);
+                            $("#companiesSet").html(data);
+                        }
+                    });
+                }
+            })
+        }
     </script>
 }
