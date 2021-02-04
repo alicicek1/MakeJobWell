@@ -4,7 +4,7 @@
     <tr>
         <td>@item.CompanyID</td>
         <td>@item.CompanyName</td>
-        <td><a class="btn btn-warning">Update</a></td>
-        <td><a class="btn btn-danger">Delete</a></td>
+        <td><a class="btn btn-warning" asp-area="Admin" asp-action="UpdateCompany" asp-controller="AdminCompany" asp-route-id="@item.CompanyID">Update</a></td>
+        <td><a class="btn btn-danger" href="/Admin/AdminCompany/Delete/@item.CompanyID">Delete</a></td>
     </tr>
 }

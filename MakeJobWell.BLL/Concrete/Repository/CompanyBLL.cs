@@ -111,18 +111,18 @@ namespace MakeJobWell.BLL.Concrete.Repositories
 
         public ICollection<Company> GetCompaniesByFLetter(string fLetter)
         {
-            //char letter = fLetter[0];
-            //if (char.IsDigit(letter))
-            //{
-            //    char[] number = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-            //    List<Company> companies = new List<Company>();
-            //    foreach (char item in number)
-            //    {
-            //        companies.AddRange(companyDAL.GetAll(a => a.CompanyName.StartsWith(item)));
-            //    }
-            //    return companies;
+            char letter = fLetter[0];
+            if (char.IsDigit(letter))
+            {
+                char[] number = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+                List<Company> companies = new List<Company>();
+                foreach (char item in number)
+                {
+                    companies.AddRange(companyDAL.GetAll(a => a.CompanyName.StartsWith(item.ToString())));
+                }
+                return companies;
 
-            //}
+            }
 
 
             fLetter = fLetter.ToString().ToUpper();

@@ -28,7 +28,7 @@ namespace MakeJobWell.UI.MVC.Controllers
             User currenUser = HttpContext.Session.Get<User>("currentUser");
             if (currenUser == null)
             {
-                return RedirectToAction("Index", "Login");
+                return RedirectToAction("Index","Home");
             }
             Comment comment = new Comment()
             {

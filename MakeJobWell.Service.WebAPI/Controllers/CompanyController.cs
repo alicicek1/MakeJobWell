@@ -50,6 +50,19 @@ namespace MakeJobWell.Service.WebAPI.Controllers
             }
         }
 
+        [HttpGet("{letter}")]
+        public IActionResult GetAllCompaniesByFLetter(string letter)
+        {
+            try
+            {
+                return Ok(GetCompanies(companyBLL.GetCompaniesByFLetter(letter)));
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
         public IActionResult GetCompaniesForHomeIndex()
         {
             try
@@ -109,6 +122,13 @@ namespace MakeJobWell.Service.WebAPI.Controllers
             {
                 return NotFound(ex.Message);
             }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            companyBLL.Delete(id);
+            return Ok();
         }
 
 
