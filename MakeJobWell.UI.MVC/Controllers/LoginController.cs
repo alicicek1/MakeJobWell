@@ -133,7 +133,7 @@ namespace MakeJobWell.UI.MVC.Controllers
                 FirstName = currentUser.FirstName,
                 LastName = currentUser.LastName,
                 Email = currentUser.Email,
-                UserID = currentUser.ID
+                ID = currentUser.ID
             };
             return PartialView("_userCheckCard", user);
 

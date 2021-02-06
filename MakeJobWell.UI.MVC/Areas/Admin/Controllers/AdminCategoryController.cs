@@ -59,5 +59,44 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
         }
 
 
+        public IActionResult UpdateCategory(int id)
+        {
+            Category category = categoryBLL.Get(id);
+            CategoryVM categoryVM = new CategoryVM
+            {
+                CategoryName = category.CategoryName,
+                Overview = category.Description
+            };
+            return View(categoryVM);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateCategory(CategoryVM categoryVM, int id)
+        {
+            Category category = categoryBLL.Get(id);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    category.CategoryName = categoryVM.CategoryName;
+                    category.Description = categoryVM.Overview;
+
+                    if (category != null)
+                    {
+                        categoryBLL.Update(category);
+                        ViewBag.IsSuccess = true;
+                    }
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception)
+            {
+                ViewBag.IsSuccess = false;
+            }
+            return View("Index");
+        }
     }
 }

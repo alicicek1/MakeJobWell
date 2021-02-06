@@ -8,7 +8,7 @@ namespace MakeJobWell.UI.MVC.Models.ViewModels
 {
     public class UserVM
     {
-        public int UserID { get; set; }
+        public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
