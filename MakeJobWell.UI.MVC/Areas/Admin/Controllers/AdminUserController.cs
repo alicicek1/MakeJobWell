@@ -124,5 +124,16 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
             }
             return View("Index");
         }
+
+        public IActionResult MakeAdminUser(int id)
+        {
+            User user = userBLL.Get(id);
+            if (user != null)
+            {
+                user.UserRole = UserRole.Admin;
+                userBLL.Update(user);
+            }
+            return View("Index");
+        }
     }
 }
