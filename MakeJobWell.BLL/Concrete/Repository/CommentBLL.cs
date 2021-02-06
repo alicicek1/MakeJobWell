@@ -62,7 +62,7 @@ namespace MakeJobWell.BLL.Concrete.Repositories
 
         public ICollection<Comment> GetAll()
         {
-            return commentDAL.GetAll();
+            return commentDAL.GetAll(a => a.IsActive == true);
         }
         #endregion
 

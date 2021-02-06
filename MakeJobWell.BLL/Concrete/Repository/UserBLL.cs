@@ -101,6 +101,18 @@ namespace MakeJobWell.BLL.Concrete.Repositories
             userDAL.Update(user);
         }
 
+        public void DeleteByUserName(string username)
+        {
+            User user = GetByUserName(username);
+            user.IsActive = false;
+            userDAL.Update(user);
+        }
+
+        private User GetByUserName(string username)
+        {
+            return userDAL.Get(a => a.UserName == username);
+        }
+
         public User Get(int id)
         {
             return userDAL.Get(a => a.ID == id);
@@ -108,7 +120,7 @@ namespace MakeJobWell.BLL.Concrete.Repositories
 
         public ICollection<User> GetAll()
         {
-            return userDAL.GetAll();
+            return userDAL.GetAll(a => a.IsActive == true);
         }
         #endregion
 

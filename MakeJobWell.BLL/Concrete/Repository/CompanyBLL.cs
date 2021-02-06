@@ -100,7 +100,7 @@ namespace MakeJobWell.BLL.Concrete.Repositories
 
         public ICollection<Company> GetAll()
         {
-            return companyDAL.GetAll();
+            return companyDAL.GetAll(a => a.IsActive == true);
         }
         #endregion
 
