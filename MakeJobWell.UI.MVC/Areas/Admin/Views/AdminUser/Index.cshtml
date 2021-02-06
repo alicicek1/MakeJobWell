@@ -7,7 +7,6 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Username</th>
                 <th>Full Name</th>
                 <th>E-mail</th>
@@ -50,6 +49,33 @@
                 }
             })
         })
+
+        function DeleteUser(UserName) {
+            console.log(UserName);
+            $.ajax({
+                type: "delete",
+                url: "http://localhost:59145/api/User/Delete/" + UserName,
+                success: function (response) {
+
+                    $.ajax({
+                        type: "get",
+                        url: "http://localhost:59145/api/User/GetAllUser",
+                        success: function (response) {
+
+                            $.ajax({
+                                type: "post",
+                                url: "/Admin/AdminUser/SetUsers",
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify(response),
+                                success: function (data) {
+                                    $("#userSet").html(data);
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+        }
     </script>
 }
 

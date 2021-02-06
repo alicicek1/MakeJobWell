@@ -26,6 +26,7 @@ namespace MakeJobWell.Service.WebAPI.Controllers
             User user = userBLL.Get(id);
             UserDTO userDTO = new UserDTO()
             {
+                IDDTO = user.ID,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,
@@ -48,6 +49,13 @@ namespace MakeJobWell.Service.WebAPI.Controllers
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        [HttpDelete("{UserName}")]
+        public IActionResult Delete(string UserName)
+        {
+            userBLL.DeleteByUserName(UserName);
+            return Ok();
         }
 
     }

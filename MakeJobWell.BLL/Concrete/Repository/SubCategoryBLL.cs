@@ -71,7 +71,7 @@ namespace MakeJobWell.BLL.Concrete.Repositories
 
         public ICollection<SubCategory> GetAll()
         {
-            return subCategoryDAL.GetAll();
+            return subCategoryDAL.GetAll(a => a.IsActive == true);
         }
         #endregion
 
@@ -82,7 +82,7 @@ namespace MakeJobWell.BLL.Concrete.Repositories
 
         public ICollection<SubCategory> GetAllWithCats()
         {
-            return subCategoryDAL.GetAll(null, x => x.Category);
+            return subCategoryDAL.GetAll(a => a.IsActive == true, x => x.Category);
         }
 
     }

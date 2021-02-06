@@ -79,5 +79,12 @@ namespace MakeJobWell.Service.WebAPI.Controllers
                 return NotFound(ex.Message);
             }
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            categoryBLL.Delete(id);
+            return Ok();
+        }
     }
 }

@@ -73,5 +73,12 @@ namespace MakeJobWell.Service.WebAPI.Controllers
             }
         }
 
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            subCategoryBLL.Delete(id);
+            return Ok();
+        }
+
     }
 }

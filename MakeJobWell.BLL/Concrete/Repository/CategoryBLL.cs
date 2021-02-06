@@ -73,7 +73,7 @@ namespace MakeJobWell.BLL.Concrete.Repository
 
         public ICollection<Category> GetAll()
         {
-            return categoryDAL.GetAll();
+            return categoryDAL.GetAll(a => a.IsActive == true);
         }
         #endregion
 

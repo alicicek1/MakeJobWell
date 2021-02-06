@@ -44,9 +44,9 @@
                 }
             })
         })
-        function Delete(id) {
+        function DeleteComp(id) {
             $.ajax({
-                type: "post",
+                type: "delete",
                 url: "http://localhost:59145/api/Company/Delete/" + id,
                 success: function (response) {
 

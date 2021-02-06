@@ -43,5 +43,31 @@
                 }
             })
         })
+
+        function DeleteCat(id) {
+            $.ajax({
+                type: "delete",
+                url: "http://localhost:59145/api/Category/Delete/" + id,
+                success: function (response) {
+
+                    $.ajax({
+                        type: "get",
+                        url: "http://localhost:59145/api/Category/GetCategories",
+                        success: function (response) {
+
+                            $.ajax({
+                                type: "post",
+                                url: "/Admin/AdminCategory/SetCategories",
+                                data: JSON.stringify(response),
+                                contentType: "application/json; charset=utf-8",
+                                success: function (data) {
+                                    $("#cateSet").html(data);
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+        }
     </script>
 }

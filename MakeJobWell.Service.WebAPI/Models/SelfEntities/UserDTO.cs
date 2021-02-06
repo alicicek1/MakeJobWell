@@ -8,6 +8,7 @@ namespace MakeJobWell.Service.WebAPI.Models.SelfEntities
 {
     public class UserDTO
     {
+        public int IDDTO { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
