@@ -108,7 +108,7 @@ namespace MakeJobWell.BLL.Concrete.Repositories
             userDAL.Update(user);
         }
 
-        private User GetByUserName(string username)
+        public User GetByUserName(string username)
         {
             return userDAL.Get(a => a.UserName == username);
         }

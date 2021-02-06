@@ -9,6 +9,7 @@ namespace MakeJobWell.BLL.Abstract.IRepositorories
     {
         User GetUserByActivationCode(Guid guid);
         User GetUserByEmailandPassword(string email, string password);
+        User GetByUserName(string username);
         void AddAdmin(User entity);
         void DeleteByUserName(string username);
     }

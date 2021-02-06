@@ -5,7 +5,8 @@
         <td>@item.UserName</td>
         <td>@item.FirstName @item.LastName</td>
         <td>@item.Email</td>
-        <td><a class="btn btn-warning">Update</a></td>
+        <td><a class="btn btn-warning" href="/Admin/AdminUser/UpdateUser/@item.ID">Update</a></td>
+        <td><a class="btn btn-success" href="/Admin/AdminUser/MakeAdminUser/@item.ID">Make Admin</a></td>
         <td><a class="btn btn-danger" onclick="DeleteUser('@item.UserName')">Delete</a></td>
     </tr>
 }

@@ -76,5 +76,35 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
             }
             return View("Index");
         }
+
+        public IActionResult UpdateSubCategory(int id)
+        {
+            SubCategory subCategory = subCategoryBLL.Get(id);
+            return View(GetSubCategoryVM(subCategory));
+        }
+
+        [HttpPost]
+        public IActionResult UpdateSubCategory(SubCategoryVM subCategoryVM, int id)
+        {
+            SubCategory subCategory = subCategoryBLL.Get(id);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    subCategory.CategoryName = subCategoryVM.SubCategoryName;
+                    subCategory.Description = subCategoryVM.Overview;
+                    subCategory.CategoryID = subCategoryVM.CatID;
+                    if (subCategory != null)
+                    {
+                        subCategoryBLL.Update(subCategory);
+                    }
+                }
+                return View("Index");
+            }
+            catch (Exception)
+            {
+                throw new Exception();
+            }
+        }
     }
 }

@@ -34,7 +34,7 @@ namespace MakeJobWell.UI.MVC.Areas.AdminsArea.Controllers
                 FirstName = currentUser.FirstName,
                 LastName = currentUser.LastName,
                 Email = currentUser.Email,
-                UserID = currentUser.ID
+                ID = currentUser.ID
             };
             return View(user);
         }

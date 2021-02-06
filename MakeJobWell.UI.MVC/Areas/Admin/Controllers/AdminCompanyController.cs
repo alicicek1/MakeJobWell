@@ -117,7 +117,7 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
             {
                 ViewBag.IsSuccess = false;
             }
-            return View();
+            return View("Index");
         }
 
         [HttpDelete]
