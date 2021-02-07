@@ -1,0 +1,33 @@
+[
+  {
+    "outputFileName": "wwwroot/css/StyleSheet.css",
+    "inputFiles": [
+      "wwwroot/css/all.min.css",
+      "wwwroot/css/bootstrap.min.css",
+      "wwwroot/css/material-design-iconic-font.css",
+      "wwwroot/css/style.css",
+      "wwwroot/css/templatemo-new-vision.css",
+      "https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css",
+      "https://fonts.googleapis.com/css?family=Open+Sans:400,800"
+    ],
+    "minify": {
+      "enabled": false,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/ScriptSheet.js",
+    "inputFiles": [
+      "wwwroot/js/bootstrap.min.js",
+      "wwwroot/js/jquery.min.js",
+      "wwwroot/js/main.js",
+      "wwwroot/js/templatemo-script.js",
+      "wwwroot/js/feather.min.js"
+    ],
+    "minify": {
+      "enabled": false,
+      "renameLocals": true
+    }
+  }
+
+]
