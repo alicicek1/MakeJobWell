@@ -1,4 +1,5 @@
 ﻿using MakeJobWell.BLL.Abstract.IRepositorories;
+using MakeJobWell.BLL.Abstract.IRepository;
 using MakeJobWell.BLL.Concrete.Repositories;
 using MakeJobWell.BLL.Concrete.Repository;
 using MakeJobWell.DAL.Concrete.DependencyInjection;
@@ -21,6 +22,7 @@ namespace MakeJobWell.BLL.Concrete.DependencyInjection
             services.AddScoped<ISubCategoryBLL, SubCategoryBLL>();
             services.AddScoped<ISupportBLL, SupportBLL>();
             services.AddScoped<IUserBLL, UserBLL>();
+            services.AddScoped<IEmailSender, EmailSender>();
         }
     }
 }

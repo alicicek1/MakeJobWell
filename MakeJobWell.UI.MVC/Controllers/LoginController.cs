@@ -1,4 +1,5 @@
 ﻿using MakeJobWell.BLL.Abstract.IRepositorories;
+using MakeJobWell.BLL.Abstract.IRepository;
 using MakeJobWell.Models.Entities;
 using MakeJobWell.Models.Enum;
 using MakeJobWell.UI.MVC.Helper;
@@ -17,9 +18,11 @@ namespace MakeJobWell.UI.MVC.Controllers
     public class LoginController : Controller
     {
         IUserBLL userBLL;
-        public LoginController(IUserBLL bll)
+        IEmailSender emailSender;
+        public LoginController(IUserBLL bll, IEmailSender sender)
         {
             userBLL = bll;
+            emailSender = sender;
         }
         public IActionResult CreateAccount()
         {
@@ -39,9 +42,13 @@ namespace MakeJobWell.UI.MVC.Controllers
                     user.UserName = userVM.UserName;
                     user.Password = userVM.Password;
 
+                    if (user != null)
+                    {
+                        userBLL.Add(user);
+                    }
 
-                    userBLL.Add(user);
                     bool result = MailHelper.SendActivationCode(user.FirstName, user.Email, user.ActivationCode);
+                    emailSender.Sender(user.FirstName, user.Email, user.ActivationCode);
                     if (result)
                     {
                         return RedirectToAction("Index");

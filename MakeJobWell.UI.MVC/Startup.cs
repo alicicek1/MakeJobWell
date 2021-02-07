@@ -8,16 +8,19 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using Microsoft.Extensions.Configuration;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FluentValidation;
-using Smidge;
+using Hangfire;
+using Hangfire.PostgreSql;
+
 
 namespace MakeJobWell.UI.MVC
 {
     public class Startup
     {
+        IConfiguration configuration;
+        public Startup(IConfiguration conf)
+        {
+            configuration = conf;
+        }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -26,7 +29,11 @@ namespace MakeJobWell.UI.MVC
                 option.RegisterValidatorsFromAssemblyContaining<Startup>();
             });
 
-            
+
+            services.AddHangfire(config => config.UsePostgreSqlStorage(configuration.GetConnectionString("HangFireConnection")));
+
+            services.AddHangfireServer();
+
             services.AddScopedBLL();
             services.AddScoped();
 
@@ -48,6 +55,7 @@ namespace MakeJobWell.UI.MVC
             app.UseSession();
             app.UseRouting();
             app.UseStaticFiles();
+            app.UseHangfireDashboard(pathMatch: "/hangfire");
             app.UseAuthentication();
             app.UseAuthorization();
 
