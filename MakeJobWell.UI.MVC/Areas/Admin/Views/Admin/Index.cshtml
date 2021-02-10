@@ -4,24 +4,76 @@
 }
 
 @model UserVM
-<div class="container">
-    <div class="col-12">
-        <div class="col-3">
-            <div class="d-flex flex-column align-items-center text-center">
-                <div class="mt-3">
-                    <h4>@Model.FirstName @Model.LastName</h4>
-                    <p class="text-secondary mb-1">@Model.UserName</p>
-                    <p class="text-secondary mb-1">@Model.PhoneNumber</p>
-                    <p class="text-secondary mb-1">@Model.Email</p>
-                    <p class="text-muted font-size-sm">@Model.Address</p>
-                    <a class="btn btn-secondary">Edit Profile</a>
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">@Model.FirstName @Model.LastName</h1>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+
+                        <p class="card-text">
+                            È universalmente riconosciuto che un lettore che osserva il layout di una pagina viene distratto dal contenuto testuale se questo è leggibile. Lo scopo dell’utilizzo del Lorem Ipsum è che offre una
+                        </p>
+
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+
+                <div class="card card-primary card-outline">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+
+                        <p class="card-text">
+                            normale distribuzione delle lettere (al contrario di quanto avviene se si utilizzano brevi frasi ripetute, ad esempio
+                        </p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div><!-- /.card -->
+            </div>
+            <!-- /.col-md-6 -->
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="m-0">Featured</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title">Special title treatment</h6>
+
+                        <p class="card-text">Esistono innumerevoli variazioni dei passaggi del Lorem Ipsum, ma la maggior parte hanno subito delle variazioni del tempo, a causa dell’inserimento di passaggi</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h5 class="m-0">Featured</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title">Special title treatment</h6>
+
+                        <p class="card-text">Al contrario di quanto si pensi, Lorem Ipsum non è semplicemente una sequenza casuale di caratteri. Risale ad un classico della letteratura latina del 45 AC, cosa che lo rende vecchio di 2000 anni.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
                 </div>
             </div>
+            <!-- /.col-md-6 -->
         </div>
-    </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
 </div>
-
-
-
-
-
+<!-- /.content -->
