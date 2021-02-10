@@ -2,31 +2,28 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<div class="container">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Username</th>
-                <th>Full Name</th>
-                <th>E-mail</th>
-            </tr>
-        </thead>
-        <tbody id="userSet">
-        </tbody>
-        <tfoot>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <th><a class="btn btn-success float-right" href="/Admin/AdminUser/InsertUser">Add New Admin</a></th>
-            </tr>
-        </tfoot>
-    </table>
-</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Full Name</th>
+            <th>E-mail</th>
+        </tr>
+    </thead>
+    <tbody id="userSet">
+    </tbody>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th><a class="btn btn-success float-right" href="/Admin/AdminUser/InsertUser">Add New Admin</a></th>
+        </tr>
+    </tfoot>
+</table>
 
 
 @section scripts{

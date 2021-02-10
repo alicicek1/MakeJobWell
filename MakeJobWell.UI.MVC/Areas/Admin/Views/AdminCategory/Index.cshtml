@@ -2,26 +2,24 @@
 @{
     ViewData["Title"] = "Index";
 }
-<div class="container">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Category Name</th>
-            </tr>
-        </thead>
-        <tbody id="cateSet">
-        </tbody>
-        <tfoot>
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th><a class="btn btn-success float-right" href="/Admin/AdminCategory/InsertCategory">Add New Category</a></th>
-            </tr>
-        </tfoot>
-    </table>
-</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Category Name</th>
+        </tr>
+    </thead>
+    <tbody id="cateSet">
+    </tbody>
+    <tfoot>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th><a class="btn btn-success float-right" href="/Admin/AdminCategory/InsertCategory">Add New Category</a></th>
+        </tr>
+    </tfoot>
+</table>
 
 @section scripts{
     <script>
