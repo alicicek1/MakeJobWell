@@ -1,11 +1,11 @@
 ﻿using MakeJobWell.BLL.Abstract.IRepositorories;
+using MakeJobWell.BLL.Constant;
+using MakeJobWell.Core.Utilities.Result;
 using MakeJobWell.DAL.Abstract;
 using MakeJobWell.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 
 namespace MakeJobWell.BLL.Concrete.Repository
 {
@@ -42,52 +42,56 @@ namespace MakeJobWell.BLL.Concrete.Repository
         #endregion
 
         #region BaseCRUD
-        public void Add(Category entity)
+        public IResult Add(Category entity)
         {
             Check(entity);
             categoryDAL.Add(entity);
+            return new SuccessResult(ResultMessage<Category>.Add(entity));
         }
-        public void Update(Category entity)
+        public IResult Update(Category entity)
         {
             Check(entity);
             categoryDAL.Update(entity);
+            return new SuccessResult(ResultMessage<Category>.Update(entity));
         }
 
-        public void Delete(Category entity)
+        public IResult Delete(Category entity)
         {
             entity.IsActive = false;
             categoryDAL.Update(entity);
+            return new SuccessResult(ResultMessage<Category>.Delete(entity));
         }
 
-        public void Delete(int id)
+        public IResult Delete(int id)
         {
-            Category category = Get(id);
+            Category category = Get(id).Data;
             category.IsActive = false;
             categoryDAL.Update(category);
+            return new SuccessResult(ResultMessage<Category>.Delete(category));
         }
 
-        public Category Get(int id)
+        public IDataResult<Category> Get(int id)
         {
-            return categoryDAL.Get(a => a.ID == id);
+            return new SuccessDataResult<Category>(categoryDAL.Get(a => a.ID == id));
         }
 
-        public ICollection<Category> GetAll()
+        public IDataResult<ICollection<Category>> GetAll()
         {
-            return categoryDAL.GetAll(a => a.IsActive == true);
+            return new SuccessDataResult<ICollection<Category>>(categoryDAL.GetAll(a => a.IsActive == true).ToList());
         }
         #endregion
 
-        public ICollection<Category> GetLatestSix()
+        public IDataResult<ICollection<Category>> GetLatestSix()
         {
-            return categoryDAL.GetAll().OrderByDescending(a => a.CreatedDate).Take(6).ToList();
+            return new SuccessDataResult<ICollection<Category>>(categoryDAL.GetAll().OrderByDescending(a => a.CreatedDate).Take(6).ToList());
         }
 
-        public ICollection<Category> GetCatWSubCats()
+        public IDataResult<ICollection<Category>> GetCatWSubCats()
         {
-            return categoryDAL.GetAll(a => a.IsActive, a => a.SubCategories).ToList();
+            return new SuccessDataResult<ICollection<Category>>(categoryDAL.GetAll(a => a.IsActive, a => a.SubCategories).ToList());
         }
 
-        
+
 
     }
 }

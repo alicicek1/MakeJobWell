@@ -1,4 +1,6 @@
 ﻿using MakeJobWell.BLL.Abstract.IRepositorories;
+using MakeJobWell.BLL.Constant;
+using MakeJobWell.Core.Utilities.Result;
 using MakeJobWell.DAL.Abstract;
 using MakeJobWell.Models.Entities;
 using System;
@@ -16,36 +18,40 @@ namespace MakeJobWell.BLL.Concrete.Repositories
         }
 
         #region BaseCRUD
-        public void Add(Support entity)
+        public IResult Add(Support entity)
         {
             supportDAL.Add(entity);
+            return new SuccessResult(ResultMessage<Support>.Add(entity));
         }
-        public void Update(Support entity)
+        public IResult Update(Support entity)
         {
             supportDAL.Update(entity);
+            return new SuccessResult(ResultMessage<Support>.Update(entity));
         }
 
-        public void Delete(Support entity)
+        public IResult Delete(Support entity)
         {
             entity.IsActive = false;
             supportDAL.Update(entity);
+            return new SuccessResult(ResultMessage<Support>.Delete(entity));
         }
 
-        public void Delete(int id)
+        public IResult Delete(int id)
         {
-            Support support = Get(id);
+            Support support = Get(id).Data;
             support.IsActive = false;
             supportDAL.Update(support);
+            return new SuccessResult(ResultMessage<Support>.Delete(support));
         }
 
-        public Support Get(int id)
+        public IDataResult<Support> Get(int id)
         {
-            return supportDAL.Get(a => a.ID == id);
+            return new SuccessDataResult<Support>(supportDAL.Get(a => a.ID == id));
         }
 
-        public ICollection<Support> GetAll()
+        public IDataResult<ICollection<Support>> GetAll()
         {
-            return supportDAL.GetAll();
+            return new SuccessDataResult<ICollection<Support>>(supportDAL.GetAll());
         }
         #endregion
 

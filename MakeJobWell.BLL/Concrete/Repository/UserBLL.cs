@@ -1,10 +1,11 @@
 ﻿using MakeJobWell.BLL.Abstract.IRepositorories;
+using MakeJobWell.BLL.Constant;
+using MakeJobWell.Core.Utilities.Result;
 using MakeJobWell.DAL.Abstract;
 using MakeJobWell.Models.Entities;
 using MakeJobWell.Models.Enum;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MakeJobWell.BLL.Concrete.Repositories
 {
@@ -68,72 +69,76 @@ namespace MakeJobWell.BLL.Concrete.Repositories
         #endregion
 
         #region BaseCRUD
-        public void Add(User entity)
+        public IResult Add(User entity)
         {
             Check(entity);
             entity.ActivationCode = Guid.NewGuid();
             entity.UserRole = UserRole.Standart;
             userDAL.Add(entity);
+            return new SuccessResult(ResultMessage<User>.Add(entity));
         }
-        public void AddAdmin(User entity)
+        public IResult AddAdmin(User entity)
         {
             Check(entity);
             entity.ActivationCode = Guid.NewGuid();
             entity.UserRole = UserRole.Admin;
             userDAL.Add(entity);
+            return new SuccessResult(ResultMessage<User>.Add(entity));
         }
-        public void Update(User entity)
+        public IResult Update(User entity)
         {
             Check(entity);
             userDAL.Update(entity);
+            return new SuccessResult(ResultMessage<User>.Update(entity));
         }
 
-        public void Delete(User entity)
+        public IResult Delete(User entity)
         {
             entity.IsActive = false;
             userDAL.Update(entity);
+            return new SuccessResult(ResultMessage<User>.Delete(entity));
         }
 
-        public void Delete(int id)
+        public IResult Delete(int id)
         {
-            User user = Get(id);
+            User user = Get(id).Data;
             user.IsActive = false;
             userDAL.Update(user);
+            return new SuccessResult(ResultMessage<User>.Delete(user));
         }
 
-        public void DeleteByUserName(string username)
+        public IResult DeleteByUserName(string username)
         {
-            User user = GetByUserName(username);
+            User user = GetByUserName(username).Data;
             user.IsActive = false;
             userDAL.Update(user);
+            return new SuccessResult(ResultMessage<User>.Delete(user));
         }
 
-        public User GetByUserName(string username)
+        public IDataResult<User> GetByUserName(string username)
         {
-            return userDAL.Get(a => a.UserName == username);
+            return new SuccessDataResult<User>(userDAL.Get(a => a.UserName == username));
         }
 
-        public User Get(int id)
+        public IDataResult<User> Get(int id)
         {
-            return userDAL.Get(a => a.ID == id);
+            return new SuccessDataResult<User>(userDAL.Get(a => a.ID == id));
         }
 
-        public ICollection<User> GetAll()
+        public IDataResult<ICollection<User>> GetAll()
         {
-            return userDAL.GetAll(a => a.IsActive == true);
+            return new SuccessDataResult<ICollection<User>>(userDAL.GetAll(a => a.IsActive == true));
         }
         #endregion
 
-        public User GetUserByActivationCode(Guid guid)
+        public IDataResult<User> GetUserByActivationCode(Guid guid)
         {
-            User newUser = userDAL.Get(a => a.ActivationCode == guid);
-            return newUser;
+            return new SuccessDataResult<User>(userDAL.Get(a => a.ActivationCode == guid));
         }
 
-        public User GetUserByEmailandPassword(string email, string password)
+        public IDataResult<User> GetUserByEmailandPassword(string email, string password)
         {
-            User loginUser = userDAL.Get(a => a.Email == email && a.Password == password && a.IsActive);
-            return loginUser;
+            return new SuccessDataResult<User>(userDAL.Get(a => a.Email == email && a.Password == password && a.IsActive));
         }
 
     }

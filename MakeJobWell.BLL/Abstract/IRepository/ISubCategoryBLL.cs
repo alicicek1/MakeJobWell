@@ -1,13 +1,12 @@
-﻿using MakeJobWell.Models.Entities;
-using System;
+﻿using MakeJobWell.Core.Utilities.Result;
+using MakeJobWell.Models.Entities;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MakeJobWell.BLL.Abstract.IRepositorories
 {
     public interface ISubCategoryBLL : IBaseBLL<SubCategory>
     {
-        ICollection<SubCategory> GetSubCategoriesByCatID(int id);
-        ICollection<SubCategory> GetAllWithCats();
+        IDataResult<ICollection<SubCategory>> GetSubCategoriesByCatID(int id);
+        IDataResult<ICollection<SubCategory>> GetAllWithCats();
     }
 }

@@ -1,13 +1,12 @@
-﻿using MakeJobWell.Models.Entities;
-using System;
+﻿using MakeJobWell.Core.Utilities.Result;
+using MakeJobWell.Models.Entities;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MakeJobWell.BLL.Abstract.IRepositorories
 {
     public interface ICategoryBLL : IBaseBLL<Category>
     {
-        ICollection<Category> GetLatestSix();
-        ICollection<Category> GetCatWSubCats();
+        IDataResult<ICollection<Category>> GetLatestSix();
+        IDataResult<ICollection<Category>> GetCatWSubCats();
     }
 }

@@ -1,12 +1,11 @@
-﻿using MakeJobWell.Models.Entities;
-using System;
+﻿using MakeJobWell.Core.Utilities.Result;
+using MakeJobWell.Models.Entities;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MakeJobWell.BLL.Abstract.IRepositorories
 {
     public interface ICommentBLL : IBaseBLL<Comment>
     {
-        ICollection<Comment> GetCommentsWUsersByComplaintID(int id);
+        IDataResult<ICollection<Comment>> GetCommentsWUsersByComplaintID(int id);
     }
 }

@@ -1,4 +1,5 @@
-﻿using MakeJobWell.DAL.Concrete.EntityTypeConfiguration;
+﻿using MakeJobWell.Core.Entity.Concrete;
+using MakeJobWell.DAL.Concrete.EntityTypeConfiguration;
 using MakeJobWell.Models.Entities;
 using MakeJobWell.Models.Entities.HelperEntities;
 using Microsoft.EntityFrameworkCore;
@@ -22,9 +23,11 @@ namespace MakeJobWell.DAL.Concrete
         public DbSet<Complaint> Complaints { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<Support> Supports { get; set; }
+        //public DbSet<Support> Supports { get; set; }
         public DbSet<PhoneNumber> PhoneNumbers { get; set; }
         public DbSet<SocialAccount> SocialAccountsk { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

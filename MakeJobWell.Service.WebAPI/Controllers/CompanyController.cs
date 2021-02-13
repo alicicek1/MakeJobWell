@@ -1,13 +1,10 @@
 ﻿using MakeJobWell.BLL.Abstract.IRepositorories;
 using MakeJobWell.Models.Entities;
 using MakeJobWell.Service.WebAPI.Models.SelfEntities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 
 namespace MakeJobWell.Service.WebAPI.Controllers
@@ -43,7 +40,7 @@ namespace MakeJobWell.Service.WebAPI.Controllers
         {
             try
             {
-                return Ok(GetCompanies(companyBLL.GetAll()));
+                return Ok(GetCompanies(companyBLL.GetAll().Data));
             }
             catch (Exception ex)
             {
@@ -56,7 +53,7 @@ namespace MakeJobWell.Service.WebAPI.Controllers
         {
             try
             {
-                return Ok(GetCompanies(companyBLL.GetCompaniesByFLetter(letter)));
+                return Ok(GetCompanies(companyBLL.GetCompaniesByFLetter(letter).Data));
             }
             catch (Exception ex)
             {
@@ -68,7 +65,7 @@ namespace MakeJobWell.Service.WebAPI.Controllers
         {
             try
             {
-                return Ok(GetCompanies(companyBLL.GetTopSix()));
+                return Ok(GetCompanies(companyBLL.GetTopSix().Data));
             }
             catch (Exception ex)
             {
@@ -81,7 +78,7 @@ namespace MakeJobWell.Service.WebAPI.Controllers
         {
             try
             {
-                Company company = companyBLL.Get(id);
+                Company company = companyBLL.Get(id).Data;
                 CompanyDTO companyDTO = new CompanyDTO()
                 {
                     CompanyID = company.ID,
@@ -104,7 +101,7 @@ namespace MakeJobWell.Service.WebAPI.Controllers
         {
             try
             {
-                List<Company> companies = companyBLL.GetCompaniesByFLetter(letter).ToList();
+                List<Company> companies = companyBLL.GetCompaniesByFLetter(letter).Data.ToList();
                 List<CompanyDTO> companyDTOs = new List<CompanyDTO>();
                 foreach (Company item in companies)
                 {

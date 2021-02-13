@@ -7,9 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace MakeJobWell.UI.MVC.Controllers
 {
     public class ComplaintController : Controller
@@ -40,7 +37,7 @@ namespace MakeJobWell.UI.MVC.Controllers
         ComplaintInsertVM GetComplaintInsertVM(Complaint complaint = null)
         {
             ComplaintInsertVM complaintInsert = new ComplaintInsertVM();
-            foreach (Company item in companyBLL.GetAll())
+            foreach (Company item in companyBLL.GetAll().Data)
             {
                 complaintInsert.Companies.Add(new SelectListItem
                 {
@@ -66,7 +63,7 @@ namespace MakeJobWell.UI.MVC.Controllers
             if (id != null)
             {
                 ComplaintInsertVM complaintInsert = new ComplaintInsertVM();
-                foreach (Company item in companyBLL.GetCompaniesBySubCatID(id.Value))
+                foreach (Company item in companyBLL.GetCompaniesBySubCatID(id.Value).Data)
                 {
                     complaintInsert.Companies.Add(new SelectListItem
                     {
@@ -124,7 +121,7 @@ namespace MakeJobWell.UI.MVC.Controllers
 
         public IActionResult DeleteComplaint(int id)
         {
-            complaintBLL.Delete(complaintBLL.Get(id));
+            complaintBLL.Delete(complaintBLL.Get(id).Data);
             return RedirectToAction("ProfilePage", "Profile");
         }
 

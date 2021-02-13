@@ -1,9 +1,10 @@
 ﻿using MakeJobWell.BLL.Abstract.IRepositorories;
+using MakeJobWell.BLL.Constant;
+using MakeJobWell.Core.Utilities.Result;
 using MakeJobWell.DAL.Abstract;
 using MakeJobWell.Models.Entities;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MakeJobWell.BLL.Concrete.Repositories
 {
@@ -69,47 +70,51 @@ namespace MakeJobWell.BLL.Concrete.Repositories
         #endregion
 
         #region BaseCRUD
-        public void Add(Company entity)
+        public IResult Add(Company entity)
         {
             Check(entity);
             companyDAL.Add(entity);
+            return new SuccessResult(ResultMessage<Company>.Add(entity));
         }
-        public void Update(Company entity)
+        public IResult Update(Company entity)
         {
             Check(entity);
             companyDAL.Update(entity);
+            return new SuccessResult(ResultMessage<Company>.Update(entity));
         }
 
-        public void Delete(Company entity)
+        public IResult Delete(Company entity)
         {
             entity.IsActive = false;
             companyDAL.Update(entity);
+            return new SuccessResult(ResultMessage<Company>.Delete(entity));
         }
 
-        public void Delete(int id)
+        public IResult Delete(int id)
         {
-            Company company = Get(id);
+            Company company = Get(id).Data;
             company.IsActive = false;
             companyDAL.Update(company);
+            return new SuccessResult(ResultMessage<Company>.Delete(company));
         }
 
-        public Company Get(int id)
+        public IDataResult<Company> Get(int id)
         {
-            return companyDAL.Get(a => a.ID == id);
+            return new SuccessDataResult<Company>(companyDAL.Get(a => a.ID == id));
         }
 
-        public ICollection<Company> GetAll()
+        public IDataResult<ICollection<Company>> GetAll()
         {
-            return companyDAL.GetAll(a => a.IsActive == true);
+            return new SuccessDataResult<ICollection<Company>>((companyDAL.GetAll(a => a.IsActive == true)));
         }
         #endregion
 
-        public ICollection<Company> GetTopSix()
+        public IDataResult<ICollection<Company>> GetTopSix()
         {
-            return companyDAL.GetTopSix();
+            return new SuccessDataResult<ICollection<Company>>(companyDAL.GetTopSix());
         }
 
-        public ICollection<Company> GetCompaniesByFLetter(string fLetter)
+        public IDataResult<ICollection<Company>> GetCompaniesByFLetter(string fLetter)
         {
             char letter = fLetter[0];
             if (char.IsDigit(letter))
@@ -120,18 +125,18 @@ namespace MakeJobWell.BLL.Concrete.Repositories
                 {
                     companies.AddRange(companyDAL.GetAll(a => a.CompanyName.StartsWith(item.ToString())));
                 }
-                return companies;
+                return new SuccessDataResult<ICollection<Company>>(companies);
 
             }
 
 
             fLetter = fLetter.ToString().ToUpper();
-            return companyDAL.GetAll(a => a.CompanyName.StartsWith(fLetter));
+            return new SuccessDataResult<ICollection<Company>>(companyDAL.GetAll(a => a.CompanyName.StartsWith(fLetter)));
         }
 
-        public ICollection<Company> GetCompaniesBySubCatID(int id)
+        public IDataResult<ICollection<Company>> GetCompaniesBySubCatID(int id)
         {
-            return companyDAL.GetAll(a => a.SubCategoryID == id);
+            return new SuccessDataResult<ICollection<Company>>(companyDAL.GetAll(a => a.SubCategoryID == id));
         }
 
     }
