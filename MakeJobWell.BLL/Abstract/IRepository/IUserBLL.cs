@@ -13,5 +13,6 @@ namespace MakeJobWell.BLL.Abstract.IRepositorories
         IDataResult<User> GetByUserName(string username);
         IResult AddAdmin(User entity);
         IResult DeleteByUserName(string username);
+        IDataResult<IList<OperationClaim>> GetClaims(User user);
     }
 }

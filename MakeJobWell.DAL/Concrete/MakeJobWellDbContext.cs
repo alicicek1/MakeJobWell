@@ -1,5 +1,4 @@
-﻿using MakeJobWell.Core.Entity.Concrete;
-using MakeJobWell.DAL.Concrete.EntityTypeConfiguration;
+﻿using MakeJobWell.DAL.Concrete.EntityTypeConfiguration;
 using MakeJobWell.Models.Entities;
 using MakeJobWell.Models.Entities.HelperEntities;
 using Microsoft.EntityFrameworkCore;

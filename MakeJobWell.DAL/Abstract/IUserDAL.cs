@@ -8,5 +8,6 @@ namespace MakeJobWell.DAL.Abstract
 {
     public interface IUserDAL : IRepository<User>
     {
+        List<OperationClaim> GetClaims(User user);
     }
 }

@@ -141,5 +141,9 @@ namespace MakeJobWell.BLL.Concrete.Repositories
             return new SuccessDataResult<User>(userDAL.Get(a => a.Email == email && a.Password == password && a.IsActive));
         }
 
+        public IDataResult<IList<OperationClaim>> GetClaims(User user)
+        {
+            return new SuccessDataResult<IList<OperationClaim>>(userDAL.GetClaims(user));
+        }
     }
 }

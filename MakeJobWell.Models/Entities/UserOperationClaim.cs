@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using MakeJobWell.Core.Entity;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MakeJobWell.Core.Entity.Concrete
+namespace MakeJobWell.Models.Entities
 {
     [Table("UserOperationClaim")]
     public class UserOperationClaim : IEntity
@@ -11,8 +12,9 @@ namespace MakeJobWell.Core.Entity.Concrete
         public int UserID { get; set; }
         [Column("OperationClaimId")]
         public int OperationClaimId { get; set; }
-
         [ForeignKey("OperationClaimId")]
         public OperationClaim OperationClaim { get; set; }
+        [ForeignKey("UserId")]
+        public User User { get; set; }
     }
 }

@@ -31,5 +31,6 @@ namespace MakeJobWell.Models.Entities
         public ICollection<Comment> Comments { get; set; }
         public ICollection<Complaint> Complaints { get; set; }
         public ICollection<Support> Supports { get; set; }
+        public ICollection<UserOperationClaim> UserOperationClaims { get; set; }
     }
 }
