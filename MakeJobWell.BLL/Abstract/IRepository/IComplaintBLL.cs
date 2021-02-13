@@ -1,16 +1,15 @@
-﻿using MakeJobWell.Models.Entities;
-using System;
+﻿using MakeJobWell.Core.Utilities.Result;
+using MakeJobWell.Models.Entities;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MakeJobWell.BLL.Abstract.IRepositorories
 {
     public interface IComplaintBLL : IBaseBLL<Complaint>
     {
-        ICollection<Complaint> GetTopSix();
-        Complaint GetComplaintCompany(int id);
-        ICollection<Complaint> GetComplaintsWCompanies();
-        ICollection<Complaint> GetComplaintsViaCompanyID(int id);
-        ICollection<Complaint> GetComplaintsByUserID(int id);
+        IDataResult<ICollection<Complaint>> GetTopSix();
+        IDataResult<Complaint> GetComplaintCompany(int id);
+        IDataResult<ICollection<Complaint>> GetComplaintsWCompanies();
+        IDataResult<ICollection<Complaint>> GetComplaintsViaCompanyID(int id);
+        IDataResult<ICollection<Complaint>> GetComplaintsByUserID(int id);
     }
 }

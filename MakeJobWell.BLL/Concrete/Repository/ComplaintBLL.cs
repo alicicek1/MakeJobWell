@@ -1,8 +1,11 @@
 ﻿using MakeJobWell.BLL.Abstract.IRepositorories;
+using MakeJobWell.BLL.Constant;
+using MakeJobWell.Core.Utilities.Result;
 using MakeJobWell.DAL.Abstract;
 using MakeJobWell.Models.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MakeJobWell.BLL.Concrete.Repositories
@@ -43,65 +46,70 @@ namespace MakeJobWell.BLL.Concrete.Repositories
         #endregion
 
         #region BaseCRUD
-        public void Add(Complaint entity)
+        public IResult Add(Complaint entity)
         {
             Check(entity);
             complaintDAL.Add(entity);
+            return new SuccessResult(ResultMessage<Complaint>.Add(entity));
         }
-        public void Update(Complaint entity)
+        public IResult Update(Complaint entity)
         {
             Check(entity);
             complaintDAL.Update(entity);
+            return new SuccessResult(ResultMessage<Complaint>.Update(entity));
         }
 
-        public void Delete(Complaint entity)
+        public IResult Delete(Complaint entity)
         {
             entity.IsActive = false;
             complaintDAL.Update(entity);
+            return new SuccessResult(ResultMessage<Complaint>.Delete(entity));
         }
 
-        public void Delete(int id)
+        public IResult
+            Delete(int id)
         {
-            Complaint complaint = Get(id);
+            Complaint complaint = Get(id).Data;
             complaint.IsActive = false;
             complaintDAL.Update(complaint);
+            return new SuccessResult(ResultMessage<Complaint>.Delete(complaint));
         }
 
-        public Complaint Get(int id)
+        public IDataResult<Complaint> Get(int id)
         {
-            return complaintDAL.Get(a => a.ID == id && a.IsActive == true);
+            return new SuccessDataResult<Complaint>(complaintDAL.Get(a => a.ID == id && a.IsActive == true));
         }
 
-        public ICollection<Complaint> GetAll()
+        public IDataResult<ICollection<Complaint>> GetAll()
         {
-            return complaintDAL.GetAll(a => a.IsActive == true);
+            return new SuccessDataResult<ICollection<Complaint>>(complaintDAL.GetAll(a => a.IsActive == true));
         }
 
 
         #endregion
 
-        public ICollection<Complaint> GetTopSix()
+        public IDataResult<ICollection<Complaint>> GetTopSix()
         {
-            return complaintDAL.GetTopSix();
+            return new SuccessDataResult<ICollection<Complaint>>(complaintDAL.GetTopSix().ToList());
         }
 
-        public Complaint GetComplaintCompany(int id)
+        public IDataResult<Complaint> GetComplaintCompany(int id)
         {
-            return complaintDAL.Get(a => a.ID == id && a.IsActive == true, a => a.Company);
+            return new SuccessDataResult<Complaint>(complaintDAL.Get(a => a.ID == id && a.IsActive == true, a => a.Company));
         }
-        public ICollection<Complaint> GetComplaintsWCompanies()
+        public IDataResult<ICollection<Complaint>> GetComplaintsWCompanies()
         {
-            return complaintDAL.GetAll(null, a => a.Company);
-        }
-
-        public ICollection<Complaint> GetComplaintsViaCompanyID(int id)
-        {
-            return complaintDAL.GetAll(a => a.CompanyID == id && a.IsActive == true);
+            return new SuccessDataResult<ICollection<Complaint>>(complaintDAL.GetAll(null, a => a.Company));
         }
 
-        public ICollection<Complaint> GetComplaintsByUserID(int id)
+        public IDataResult<ICollection<Complaint>> GetComplaintsViaCompanyID(int id)
         {
-            return complaintDAL.GetAll(a => a.UserID == id && a.IsActive == true);
+            return new SuccessDataResult<ICollection<Complaint>>(complaintDAL.GetAll(a => a.CompanyID == id && a.IsActive == true));
+        }
+
+        public IDataResult<ICollection<Complaint>> GetComplaintsByUserID(int id)
+        {
+            return new SuccessDataResult<ICollection<Complaint>>(complaintDAL.GetAll(a => a.UserID == id && a.IsActive == true));
         }
     }
 }

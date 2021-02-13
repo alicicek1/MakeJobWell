@@ -1,12 +1,8 @@
 ﻿using MakeJobWell.BLL.Abstract.IRepositorories;
 using MakeJobWell.Models.Entities;
 using MakeJobWell.Service.WebAPI.Models.SelfEntities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MakeJobWell.Service.WebAPI.Controllers
 {
@@ -23,7 +19,7 @@ namespace MakeJobWell.Service.WebAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult GetUserByID(int id)
         {
-            User user = userBLL.Get(id);
+            User user = userBLL.Get(id).Data;
             UserDTO userDTO = new UserDTO()
             {
                 IDDTO = user.ID,
@@ -43,7 +39,7 @@ namespace MakeJobWell.Service.WebAPI.Controllers
         {
             try
             {
-                return Ok(userBLL.GetAll());
+                return Ok(userBLL.GetAll().Data);
             }
             catch (Exception ex)
             {

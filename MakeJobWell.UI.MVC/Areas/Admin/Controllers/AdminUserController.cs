@@ -6,8 +6,6 @@ using MakeJobWell.UI.MVC.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
 {
@@ -82,7 +80,7 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
 
         public IActionResult UpdateUser(int id)
         {
-            User user = userBLL.Get(id);
+            User user = userBLL.Get(id).Data;
             UserVM userVM = new UserVM
             {
                 FirstName = user.FirstName,
@@ -99,7 +97,7 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult UpdateUser(UserVM userVM, int id)
         {
-            User user = userBLL.Get(id);
+            User user = userBLL.Get(id).Data;
             try
             {
                 if (ModelState.IsValid)
@@ -127,7 +125,7 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
 
         public IActionResult MakeAdminUser(int id)
         {
-            User user = userBLL.Get(id);
+            User user = userBLL.Get(id).Data;
             if (user != null)
             {
                 user.UserRole = UserRole.Admin;

@@ -1,4 +1,6 @@
 ﻿using MakeJobWell.BLL.Abstract.IRepositorories;
+using MakeJobWell.BLL.Constant;
+using MakeJobWell.Core.Utilities.Result;
 using MakeJobWell.DAL.Abstract;
 using MakeJobWell.Models.Entities;
 using System;
@@ -40,49 +42,53 @@ namespace MakeJobWell.BLL.Concrete.Repositories
         #endregion
 
         #region BaseCRUD
-        public void Add(SubCategory entity)
+        public IResult Add(SubCategory entity)
         {
             Check(entity);
             subCategoryDAL.Add(entity);
+            return new SuccessResult(ResultMessage<SubCategory>.Add(entity));
         }
-        public void Update(SubCategory entity)
+        public IResult Update(SubCategory entity)
         {
             Check(entity);
             subCategoryDAL.Update(entity);
+            return new SuccessResult(ResultMessage<SubCategory>.Update(entity));
         }
 
-        public void Delete(SubCategory entity)
+        public IResult Delete(SubCategory entity)
         {
             entity.IsActive = false;
             subCategoryDAL.Update(entity);
+            return new SuccessResult(ResultMessage<SubCategory>.Delete(entity));
         }
 
-        public void Delete(int id)
+        public IResult Delete(int id)
         {
-            SubCategory subCategory = Get(id);
+            SubCategory subCategory = Get(id).Data;
             subCategory.IsActive = false;
             subCategoryDAL.Update(subCategory);
+            return new SuccessResult(ResultMessage<SubCategory>.Delete(subCategory));
         }
 
-        public SubCategory Get(int id)
+        public IDataResult<SubCategory> Get(int id)
         {
-            return subCategoryDAL.Get(a => a.ID == id);
+            return new SuccessDataResult<SubCategory>(subCategoryDAL.Get(a => a.ID == id));
         }
 
-        public ICollection<SubCategory> GetAll()
+        public IDataResult<ICollection<SubCategory>> GetAll()
         {
-            return subCategoryDAL.GetAll(a => a.IsActive == true);
+            return new SuccessDataResult<ICollection<SubCategory>>(subCategoryDAL.GetAll(a => a.IsActive == true));
         }
         #endregion
 
-        public ICollection<SubCategory> GetSubCategoriesByCatID(int id)
+        public IDataResult<ICollection<SubCategory>> GetSubCategoriesByCatID(int id)
         {
-            return subCategoryDAL.GetAll(a => a.CategoryID == id, a => a.Category);
+            return new SuccessDataResult<ICollection<SubCategory>>(subCategoryDAL.GetAll(a => a.CategoryID == id, a => a.Category));
         }
 
-        public ICollection<SubCategory> GetAllWithCats()
+        public IDataResult<ICollection<SubCategory>> GetAllWithCats()
         {
-            return subCategoryDAL.GetAll(a => a.IsActive == true, x => x.Category);
+            return new SuccessDataResult<ICollection<SubCategory>>(subCategoryDAL.GetAll(a => a.IsActive == true, x => x.Category));
         }
 
     }

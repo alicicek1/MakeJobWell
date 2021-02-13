@@ -2,12 +2,9 @@
 using MakeJobWell.Models.Entities;
 using MakeJobWell.Service.WebAPI.Models;
 using MakeJobWell.Service.WebAPI.Models.RelatedEntities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MakeJobWell.Service.WebAPI.Controllers
 {
@@ -40,7 +37,7 @@ namespace MakeJobWell.Service.WebAPI.Controllers
         {
             try
             {
-                return Ok(GetComplaints(complaintBLL.GetAll()));
+                return Ok(GetComplaints(complaintBLL.GetAll().Data));
             }
             catch (Exception ex)
             {
@@ -53,7 +50,7 @@ namespace MakeJobWell.Service.WebAPI.Controllers
         {
             try
             {
-                return Ok(GetComplaints(complaintBLL.GetTopSix()));
+                return Ok(GetComplaints(complaintBLL.GetTopSix().Data));
             }
             catch (Exception ex)
             {
@@ -66,7 +63,7 @@ namespace MakeJobWell.Service.WebAPI.Controllers
         {
             try
             {
-                Complaint complaint = complaintBLL.GetComplaintCompany(id);
+                Complaint complaint = complaintBLL.GetComplaintCompany(id).Data;
                 ComplaintCompanyDTO complaintCompanyDTO = new ComplaintCompanyDTO();
                 complaintCompanyDTO.ComplaintID = complaint.ID;
                 complaintCompanyDTO.Title = complaint.ComplaintTitle;
@@ -86,7 +83,7 @@ namespace MakeJobWell.Service.WebAPI.Controllers
             try
             {
                 List<ComplaintDTO> complaintDTOs = new List<ComplaintDTO>();
-                foreach (Complaint item in complaintBLL.GetComplaintsViaCompanyID(id))
+                foreach (Complaint item in complaintBLL.GetComplaintsViaCompanyID(id).Data)
                 {
                     complaintDTOs.Add(new ComplaintDTO
                     {
@@ -111,7 +108,7 @@ namespace MakeJobWell.Service.WebAPI.Controllers
             try
             {
                 List<ComplaintDTO> complaintDTOs = new List<ComplaintDTO>();
-                foreach (Complaint item in complaintBLL.GetComplaintsByUserID(id))
+                foreach (Complaint item in complaintBLL.GetComplaintsByUserID(id).Data)
                 {
                     complaintDTOs.Add(new ComplaintDTO
                     {
@@ -133,7 +130,7 @@ namespace MakeJobWell.Service.WebAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult DeactivateComplaint(int id)
         {
-            complaintBLL.Delete(complaintBLL.Get(id));
+            complaintBLL.Delete(complaintBLL.Get(id).Data);
             return Ok();
         }
 

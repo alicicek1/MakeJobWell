@@ -9,9 +9,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace MakeJobWell.UI.MVC.Controllers
 {
@@ -75,7 +73,7 @@ namespace MakeJobWell.UI.MVC.Controllers
 
         public IActionResult ActiveUser(Guid id)
         {
-            User newUser = userBLL.GetUserByActivationCode(id);
+            User newUser = userBLL.GetUserByActivationCode(id).Data;
             if (newUser != null)
             {
                 newUser.IsActive = true;
@@ -97,7 +95,7 @@ namespace MakeJobWell.UI.MVC.Controllers
         [HttpPost]
         public IActionResult Index(UserVM userVM)
         {
-            User loginUser = userBLL.GetUserByEmailandPassword(userVM.Email, userVM.Password);
+            User loginUser = userBLL.GetUserByEmailandPassword(userVM.Email, userVM.Password).Data;
             if (loginUser != null)
             {
                 List<Claim> claims = new List<Claim>()

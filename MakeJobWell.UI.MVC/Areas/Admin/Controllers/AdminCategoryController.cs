@@ -61,7 +61,7 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
 
         public IActionResult UpdateCategory(int id)
         {
-            Category category = categoryBLL.Get(id);
+            Category category = categoryBLL.Get(id).Data;
             CategoryVM categoryVM = new CategoryVM
             {
                 CategoryName = category.CategoryName,
@@ -73,7 +73,7 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult UpdateCategory(CategoryVM categoryVM, int id)
         {
-            Category category = categoryBLL.Get(id);
+            Category category = categoryBLL.Get(id).Data;
             try
             {
                 if (ModelState.IsValid)

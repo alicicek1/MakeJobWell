@@ -27,7 +27,7 @@ namespace MakeJobWell.Service.WebAPI.Controllers
             List<CommentDTO> commentDTOs = new List<CommentDTO>();
             try
             {
-                foreach (Comment item in commentBLL.GetCommentsWUsersByComplaintID(id))
+                foreach (Comment item in commentBLL.GetCommentsWUsersByComplaintID(id).Data)
                 {
                     commentDTOs.Add(new CommentDTO
                     {

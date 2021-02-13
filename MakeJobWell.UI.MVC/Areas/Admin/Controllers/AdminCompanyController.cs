@@ -5,8 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
 {
@@ -38,7 +36,7 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
         CompanyVM GetCompanyVM(Company company = null)
         {
             CompanyVM companyVM = new CompanyVM();
-            foreach (SubCategory item in SubCategoryBLL.GetAll())
+            foreach (SubCategory item in SubCategoryBLL.GetAll().Data)
             {
                 companyVM.SubCategories.Add(new SelectListItem
                 {
@@ -84,14 +82,14 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
 
         public IActionResult UpdateCompany(int id)
         {
-            Company company = companyBLL.Get(id);
+            Company company = companyBLL.Get(id).Data;
             return View(GetCompanyVM(company));
         }
 
         [HttpPost]
         public IActionResult UpdateCompany(CompanyVM companyVM, int id)
         {
-            Company company = companyBLL.Get(id);
+            Company company = companyBLL.Get(id).Data;
             try
             {
                 if (ModelState.IsValid)

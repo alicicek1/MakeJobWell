@@ -1,12 +1,9 @@
 ﻿using MakeJobWell.BLL.Abstract.IRepositorories;
 using MakeJobWell.Models.Entities;
 using MakeJobWell.Service.WebAPI.Models.SelfEntities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MakeJobWell.Service.WebAPI.Controllers
 {
@@ -40,7 +37,7 @@ namespace MakeJobWell.Service.WebAPI.Controllers
         {
             try
             {
-                return Ok(GetSubCategories(subCategoryBLL.GetAll()));
+                return Ok(GetSubCategories(subCategoryBLL.GetAll().Data));
             }
             catch (Exception ex)
             {
@@ -52,7 +49,7 @@ namespace MakeJobWell.Service.WebAPI.Controllers
         {
             try
             {
-                return Ok(GetSubCategories(subCategoryBLL.GetAllWithCats()));
+                return Ok(GetSubCategories(subCategoryBLL.GetAllWithCats().Data));
             }
             catch (Exception ex)
             {
@@ -65,7 +62,7 @@ namespace MakeJobWell.Service.WebAPI.Controllers
         {
             try
             {
-                return Ok(GetSubCategories(subCategoryBLL.GetSubCategoriesByCatID(id)));
+                return Ok(GetSubCategories(subCategoryBLL.GetSubCategoriesByCatID(id).Data));
             }
             catch (Exception ex)
             {

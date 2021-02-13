@@ -1,9 +1,10 @@
 ﻿using MakeJobWell.BLL.Abstract.IRepositorories;
+using MakeJobWell.BLL.Constant;
+using MakeJobWell.Core.Utilities.Result;
 using MakeJobWell.DAL.Abstract;
 using MakeJobWell.Models.Entities;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MakeJobWell.BLL.Concrete.Repositories
 {
@@ -27,48 +28,52 @@ namespace MakeJobWell.BLL.Concrete.Repositories
             {
                 throw new Exception("Comment needs to be between 2 and 200 character.");
             }
-        } 
+        }
         #endregion
 
         #region BaseCRUD
-        public void Add(Comment entity)
+        public IResult Add(Comment entity)
         {
             Check(entity);
             commentDAL.Add(entity);
+            return new SuccessResult(ResultMessage<Comment>.Add(entity));
         }
-        public void Update(Comment entity)
+        public IResult Update(Comment entity)
         {
             Check(entity);
             commentDAL.Update(entity);
+            return new SuccessResult(ResultMessage<Comment>.Update(entity));
         }
 
-        public void Delete(Comment entity)
+        public IResult Delete(Comment entity)
         {
             entity.IsActive = false;
             commentDAL.Update(entity);
+            return new SuccessResult(ResultMessage<Comment>.Delete(entity));
         }
 
-        public void Delete(int id)
+        public IResult Delete(int id)
         {
-            Comment comment = Get(id);
+            Comment comment = Get(id).Data;
             comment.IsActive = false;
             commentDAL.Update(comment);
+            return new SuccessResult(ResultMessage<Comment>.Delete(comment));
         }
 
-        public Comment Get(int id)
+        public IDataResult<Comment> Get(int id)
         {
-            return commentDAL.Get(a => a.ID == id);
+            return new SuccessDataResult<Comment>(commentDAL.Get(a => a.ID == id));
         }
 
-        public ICollection<Comment> GetAll()
+        public IDataResult<ICollection<Comment>> GetAll()
         {
-            return commentDAL.GetAll(a => a.IsActive == true);
+            return new SuccessDataResult<ICollection<Comment>>(commentDAL.GetAll(a => a.IsActive == true));
         }
         #endregion
 
-        public ICollection<Comment> GetCommentsWUsersByComplaintID(int id)
+        public IDataResult<ICollection<Comment>> GetCommentsWUsersByComplaintID(int id)
         {
-            return commentDAL.GetAll(a => a.ComplaintID == id, a => a.User);
+            return new SuccessDataResult<ICollection<Comment>>(commentDAL.GetAll(a => a.ComplaintID == id, a => a.User));
         }
     }
 }
