@@ -36,20 +36,20 @@ namespace MakeJobWell.BLL.Concrete.Repositories
         {
             Check(entity);
             commentDAL.Add(entity);
-            return new SuccessResult(ResultMessage<Comment>.Add(entity));
+            return new SuccessResult(ResultMessage<Comment>.Add(entity.ToString()));
         }
         public IResult Update(Comment entity)
         {
             Check(entity);
             commentDAL.Update(entity);
-            return new SuccessResult(ResultMessage<Comment>.Update(entity));
+            return new SuccessResult(ResultMessage<Comment>.Update(entity.CommentText));
         }
 
         public IResult Delete(Comment entity)
         {
             entity.IsActive = false;
             commentDAL.Update(entity);
-            return new SuccessResult(ResultMessage<Comment>.Delete(entity));
+            return new SuccessResult(ResultMessage<Comment>.Delete(entity.CommentText));
         }
 
         public IResult Delete(int id)
@@ -57,7 +57,7 @@ namespace MakeJobWell.BLL.Concrete.Repositories
             Comment comment = Get(id).Data;
             comment.IsActive = false;
             commentDAL.Update(comment);
-            return new SuccessResult(ResultMessage<Comment>.Delete(comment));
+            return new SuccessResult(ResultMessage<Comment>.Delete(comment.CommentText));
         }
 
         public IDataResult<Comment> Get(int id)

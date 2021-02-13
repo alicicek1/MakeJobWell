@@ -6,7 +6,6 @@ using MakeJobWell.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace MakeJobWell.BLL.Concrete.Repositories
 {
@@ -50,20 +49,20 @@ namespace MakeJobWell.BLL.Concrete.Repositories
         {
             Check(entity);
             complaintDAL.Add(entity);
-            return new SuccessResult(ResultMessage<Complaint>.Add(entity));
+            return new SuccessResult(ResultMessage<Complaint>.Add(entity.ToString()));
         }
         public IResult Update(Complaint entity)
         {
             Check(entity);
             complaintDAL.Update(entity);
-            return new SuccessResult(ResultMessage<Complaint>.Update(entity));
+            return new SuccessResult(ResultMessage<Complaint>.Update(entity.ComplaintTitle));
         }
 
         public IResult Delete(Complaint entity)
         {
             entity.IsActive = false;
             complaintDAL.Update(entity);
-            return new SuccessResult(ResultMessage<Complaint>.Delete(entity));
+            return new SuccessResult(ResultMessage<Complaint>.Delete(entity.ComplaintTitle));
         }
 
         public IResult
@@ -72,7 +71,7 @@ namespace MakeJobWell.BLL.Concrete.Repositories
             Complaint complaint = Get(id).Data;
             complaint.IsActive = false;
             complaintDAL.Update(complaint);
-            return new SuccessResult(ResultMessage<Complaint>.Delete(complaint));
+            return new SuccessResult(ResultMessage<Complaint>.Delete(complaint.ComplaintTitle));
         }
 
         public IDataResult<Complaint> Get(int id)

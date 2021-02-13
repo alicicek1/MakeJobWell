@@ -21,19 +21,19 @@ namespace MakeJobWell.BLL.Concrete.Repositories
         public IResult Add(Support entity)
         {
             supportDAL.Add(entity);
-            return new SuccessResult(ResultMessage<Support>.Add(entity));
+            return new SuccessResult(ResultMessage<Support>.Add(entity.ToString()));
         }
         public IResult Update(Support entity)
         {
             supportDAL.Update(entity);
-            return new SuccessResult(ResultMessage<Support>.Update(entity));
+            return new SuccessResult(ResultMessage<Support>.Update(entity.UserID.ToString()));
         }
 
         public IResult Delete(Support entity)
         {
             entity.IsActive = false;
             supportDAL.Update(entity);
-            return new SuccessResult(ResultMessage<Support>.Delete(entity));
+            return new SuccessResult(ResultMessage<Support>.Delete(entity.UserID.ToString()));
         }
 
         public IResult Delete(int id)
@@ -41,7 +41,7 @@ namespace MakeJobWell.BLL.Concrete.Repositories
             Support support = Get(id).Data;
             support.IsActive = false;
             supportDAL.Update(support);
-            return new SuccessResult(ResultMessage<Support>.Delete(support));
+            return new SuccessResult(ResultMessage<Support>.Delete(support.UserID.ToString()));
         }
 
         public IDataResult<Support> Get(int id)

@@ -46,20 +46,20 @@ namespace MakeJobWell.BLL.Concrete.Repositories
         {
             Check(entity);
             subCategoryDAL.Add(entity);
-            return new SuccessResult(ResultMessage<SubCategory>.Add(entity));
+            return new SuccessResult(ResultMessage<SubCategory>.Add(entity.ToString()));
         }
         public IResult Update(SubCategory entity)
         {
             Check(entity);
             subCategoryDAL.Update(entity);
-            return new SuccessResult(ResultMessage<SubCategory>.Update(entity));
+            return new SuccessResult(ResultMessage<SubCategory>.Update(entity.CategoryName));
         }
 
         public IResult Delete(SubCategory entity)
         {
             entity.IsActive = false;
             subCategoryDAL.Update(entity);
-            return new SuccessResult(ResultMessage<SubCategory>.Delete(entity));
+            return new SuccessResult(ResultMessage<SubCategory>.Delete(entity.CategoryName));
         }
 
         public IResult Delete(int id)
@@ -67,7 +67,7 @@ namespace MakeJobWell.BLL.Concrete.Repositories
             SubCategory subCategory = Get(id).Data;
             subCategory.IsActive = false;
             subCategoryDAL.Update(subCategory);
-            return new SuccessResult(ResultMessage<SubCategory>.Delete(subCategory));
+            return new SuccessResult(ResultMessage<SubCategory>.Delete(subCategory.CategoryName));
         }
 
         public IDataResult<SubCategory> Get(int id)
