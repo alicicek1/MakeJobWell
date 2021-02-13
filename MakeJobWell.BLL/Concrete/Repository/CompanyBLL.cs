@@ -74,20 +74,20 @@ namespace MakeJobWell.BLL.Concrete.Repositories
         {
             Check(entity);
             companyDAL.Add(entity);
-            return new SuccessResult(ResultMessage<Company>.Add(entity));
+            return new SuccessResult(ResultMessage<Company>.Add(entity.ToString()));
         }
         public IResult Update(Company entity)
         {
             Check(entity);
             companyDAL.Update(entity);
-            return new SuccessResult(ResultMessage<Company>.Update(entity));
+            return new SuccessResult(ResultMessage<Company>.Update(entity.CompanyName));
         }
 
         public IResult Delete(Company entity)
         {
             entity.IsActive = false;
             companyDAL.Update(entity);
-            return new SuccessResult(ResultMessage<Company>.Delete(entity));
+            return new SuccessResult(ResultMessage<Company>.Delete(entity.CompanyName));
         }
 
         public IResult Delete(int id)
@@ -95,7 +95,7 @@ namespace MakeJobWell.BLL.Concrete.Repositories
             Company company = Get(id).Data;
             company.IsActive = false;
             companyDAL.Update(company);
-            return new SuccessResult(ResultMessage<Company>.Delete(company));
+            return new SuccessResult(ResultMessage<Company>.Delete(company.CompanyName));
         }
 
         public IDataResult<Company> Get(int id)

@@ -5,9 +5,9 @@ namespace MakeJobWell.BLL.Constant
     public static class ResultMessage<TEntity>
         where TEntity : class
     {
-        public static string Add(TEntity entity) { return $"{entity} added."; }
-        public static string Delete(TEntity entity) { return $"{entity} deleted."; }
-        public static string Update(TEntity entity) { return $"{entity} updated."; }
+        public static string Add(string msg) { return $"{msg} added."; }
+        public static string Delete(string msg) { return $"{msg} deleted."; }
+        public static string Update(string msg) { return $"{msg} updated."; }
 
     }
 }

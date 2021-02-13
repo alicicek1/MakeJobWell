@@ -75,7 +75,7 @@ namespace MakeJobWell.BLL.Concrete.Repositories
             entity.ActivationCode = Guid.NewGuid();
             entity.UserRole = UserRole.Standart;
             userDAL.Add(entity);
-            return new SuccessResult(ResultMessage<User>.Add(entity));
+            return new SuccessResult(ResultMessage<User>.Add(entity.ToString()));
         }
         public IResult AddAdmin(User entity)
         {
@@ -83,20 +83,20 @@ namespace MakeJobWell.BLL.Concrete.Repositories
             entity.ActivationCode = Guid.NewGuid();
             entity.UserRole = UserRole.Admin;
             userDAL.Add(entity);
-            return new SuccessResult(ResultMessage<User>.Add(entity));
+            return new SuccessResult(ResultMessage<User>.Add($"{entity.ToString()} (As an admin.)"));
         }
         public IResult Update(User entity)
         {
             Check(entity);
             userDAL.Update(entity);
-            return new SuccessResult(ResultMessage<User>.Update(entity));
+            return new SuccessResult(ResultMessage<User>.Update(entity.FirstName));
         }
 
         public IResult Delete(User entity)
         {
             entity.IsActive = false;
             userDAL.Update(entity);
-            return new SuccessResult(ResultMessage<User>.Delete(entity));
+            return new SuccessResult(ResultMessage<User>.Delete(entity.FirstName));
         }
 
         public IResult Delete(int id)
@@ -104,7 +104,7 @@ namespace MakeJobWell.BLL.Concrete.Repositories
             User user = Get(id).Data;
             user.IsActive = false;
             userDAL.Update(user);
-            return new SuccessResult(ResultMessage<User>.Delete(user));
+            return new SuccessResult(ResultMessage<User>.Delete(user.FirstName));
         }
 
         public IResult DeleteByUserName(string username)
@@ -112,7 +112,7 @@ namespace MakeJobWell.BLL.Concrete.Repositories
             User user = GetByUserName(username).Data;
             user.IsActive = false;
             userDAL.Update(user);
-            return new SuccessResult(ResultMessage<User>.Delete(user));
+            return new SuccessResult(ResultMessage<User>.Delete(user.FirstName));
         }
 
         public IDataResult<User> GetByUserName(string username)

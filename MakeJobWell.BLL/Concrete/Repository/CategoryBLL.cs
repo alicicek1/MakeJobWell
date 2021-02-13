@@ -46,20 +46,20 @@ namespace MakeJobWell.BLL.Concrete.Repository
         {
             Check(entity);
             categoryDAL.Add(entity);
-            return new SuccessResult(ResultMessage<Category>.Add(entity));
+            return new SuccessResult(ResultMessage<Category>.Add(entity.CategoryName));
         }
         public IResult Update(Category entity)
         {
             Check(entity);
             categoryDAL.Update(entity);
-            return new SuccessResult(ResultMessage<Category>.Update(entity));
+            return new SuccessResult(ResultMessage<Category>.Update(entity.CategoryName));
         }
 
         public IResult Delete(Category entity)
         {
             entity.IsActive = false;
             categoryDAL.Update(entity);
-            return new SuccessResult(ResultMessage<Category>.Delete(entity));
+            return new SuccessResult(ResultMessage<Category>.Delete(entity.CategoryName));
         }
 
         public IResult Delete(int id)
@@ -67,7 +67,7 @@ namespace MakeJobWell.BLL.Concrete.Repository
             Category category = Get(id).Data;
             category.IsActive = false;
             categoryDAL.Update(category);
-            return new SuccessResult(ResultMessage<Category>.Delete(category));
+            return new SuccessResult(ResultMessage<Category>.Delete(category.CategoryName));
         }
 
         public IDataResult<Category> Get(int id)
