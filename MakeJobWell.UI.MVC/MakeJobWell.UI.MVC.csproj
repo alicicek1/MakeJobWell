@@ -7,19 +7,11 @@
   <ItemGroup>
     <Content Remove="wwwroot\css\adminlte.css" />
     <Content Remove="wwwroot\css\adminlte.css.map" />
-    <Content Remove="wwwroot\css\adminlte.min.css" />
-    <Content Remove="wwwroot\css\adminlte.min.css.map" />
     <Content Remove="wwwroot\css\all.min.css" />
     <Content Remove="wwwroot\css\bootstrap.min.css" />
-    <Content Remove="wwwroot\css\material-design-iconic-font.css" />
-    <Content Remove="wwwroot\css\material-design-iconic-font.min.css" />
     <Content Remove="wwwroot\css\style.css" />
     <Content Remove="wwwroot\css\style.css.map" />
     <Content Remove="wwwroot\css\templatemo-new-vision.css" />
-    <Content Remove="wwwroot\js\adminlte.js" />
-    <Content Remove="wwwroot\js\adminlte.js.map" />
-    <Content Remove="wwwroot\js\adminlte.min.js" />
-    <Content Remove="wwwroot\js\adminlte.min.js.map" />
     <Content Remove="wwwroot\webfonts\poppins\Material-Design-Iconic-Font.eot" />
     <Content Remove="wwwroot\webfonts\poppins\Material-Design-Iconic-Font.svg" />
     <Content Remove="wwwroot\webfonts\poppins\Material-Design-Iconic-Font.ttf" />
@@ -214,20 +206,12 @@
   <ItemGroup>
     <None Include="wwwroot\css\adminlte.css" />
     <None Include="wwwroot\css\adminlte.css.map" />
-    <None Include="wwwroot\css\adminlte.min.css" />
-    <None Include="wwwroot\css\adminlte.min.css.map" />
     <None Include="wwwroot\css\all.min.css" />
     <None Include="wwwroot\css\bootstrap.min.css" />
-    <None Include="wwwroot\css\material-design-iconic-font.css" />
-    <None Include="wwwroot\css\material-design-iconic-font.min.css" />
     <None Include="wwwroot\css\style.css" />
     <None Include="wwwroot\css\style.css.map" />
     <None Include="wwwroot\css\templatemo-new-vision.css" />
     <None Include="wwwroot\img\AdminLTELogo.png" />
-    <None Include="wwwroot\js\adminlte.js" />
-    <None Include="wwwroot\js\adminlte.js.map" />
-    <None Include="wwwroot\js\adminlte.min.js" />
-    <None Include="wwwroot\js\adminlte.min.js.map" />
     <None Include="wwwroot\webfonts\poppins\Material-Design-Iconic-Font.eot" />
     <None Include="wwwroot\webfonts\poppins\Material-Design-Iconic-Font.svg" />
     <None Include="wwwroot\webfonts\poppins\Material-Design-Iconic-Font.ttf" />
