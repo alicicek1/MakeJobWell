@@ -4,7 +4,6 @@
     "inputFiles": [
       "wwwroot/css/all.min.css",
       "wwwroot/css/bootstrap.min.css",
-      "wwwroot/css/material-design-iconic-font.css",
       "wwwroot/css/style.css",
       "wwwroot/css/templatemo-new-vision.css",
       "https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css",
