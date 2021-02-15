@@ -1,5 +1,7 @@
 ﻿using MakeJobWell.BLL.Abstract.IRepositorories;
+using MakeJobWell.BLL.Concrete.EntityValidation;
 using MakeJobWell.BLL.Constant;
+using MakeJobWell.Core.CrossCuttingConcerns.Validation.FluentVal;
 using MakeJobWell.Core.Utilities.Result;
 using MakeJobWell.DAL.Abstract;
 using MakeJobWell.Models.Entities;
@@ -71,7 +73,9 @@ namespace MakeJobWell.BLL.Concrete.Repositories
         #region BaseCRUD
         public IResult Add(User entity)
         {
-            Check(entity);
+            //Check(entity);
+            FluentValidationTool.Validate(new UserValidator(), entity);
+
             entity.ActivationCode = Guid.NewGuid();
             entity.UserRole = UserRole.Standart;
             userDAL.Add(entity);
@@ -79,7 +83,9 @@ namespace MakeJobWell.BLL.Concrete.Repositories
         }
         public IResult AddAdmin(User entity)
         {
-            Check(entity);
+            //Check(entity);
+            FluentValidationTool.Validate(new UserValidator(), entity);
+
             entity.ActivationCode = Guid.NewGuid();
             entity.UserRole = UserRole.Admin;
             userDAL.Add(entity);
