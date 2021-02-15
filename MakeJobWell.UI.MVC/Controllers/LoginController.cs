@@ -59,13 +59,15 @@ namespace MakeJobWell.UI.MVC.Controllers
                 }
                 else
                 {
-                    ViewBag.Password = "Passwords do not match.";
+                    ViewBag.Password = "Passwords do not match."; 
+                    return View();
                 }
 
             }
             catch (Exception ex)
             {
                 ViewBag.Mesaage = ($"Something went wrong. /{0}", ex);
+                return View();
             }
 
             return View();

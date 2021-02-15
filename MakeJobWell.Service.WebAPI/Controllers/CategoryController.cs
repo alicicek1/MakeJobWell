@@ -33,6 +33,17 @@ namespace MakeJobWell.Service.WebAPI.Controllers
 
         }
 
+        [HttpPost]
+        public IActionResult Add(Category category)
+        {
+            var result = categoryBLL.Add(category);
+            if (result.Succes)
+            {
+                return Ok(result.Message);
+            }
+            return BadRequest(result.Message);
+        }
+
         public IActionResult GetCategories()
         {
             try

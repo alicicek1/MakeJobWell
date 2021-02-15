@@ -14,22 +14,22 @@
                     <div class="form-group">
                         <label for="name"><i class="fas fa-user-alt"></i></label>
                         <input type="text" name="firstName" id="name" asp-for="FirstName" placeholder="First Name" />
-                        <span asp-validation-for="FirstName"></span>
+                        <span class="text-danger" asp-validation-for="FirstName"></span>
                     </div>
                     <div class="form-group">
                         <label for="name"><i class="fas fa-user-alt"></i></label>
                         <input type="text" name="lastName" id="name" asp-for="LastName" placeholder="Last Name" />
-                        <span asp-validation-for="LastName"></span>
+                        <span class="text-danger" asp-validation-for="LastName"></span>
                     </div>
                     <div class="form-group">
                         <label for="email"><i class="far fa-id-card"></i></label>
                         <input asp-for="Email" placeholder="Email" />
-                        <span asp-validation-for="Email"></span>
+                        <span class="text-danger" asp-validation-for="Email"></span>
                     </div>
                     <div class="form-group">
                         <label for="username"><i class="far fa-id-badge"></i></label>
                         <input type="text" name="username" id="username" asp-for="UserName" placeholder="Username" />
-                        <span asp-validation-for="UserName"></span>
+                        <span class="text-danger" asp-validation-for="UserName"></span>
                     </div>
                     <div class="form-group">
                         <label for="pass"><i class="fas fa-wrench"></i></label>

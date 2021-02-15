@@ -1,5 +1,7 @@
 ﻿using MakeJobWell.BLL.Abstract.IRepositorories;
+using MakeJobWell.BLL.Concrete.EntityValidation;
 using MakeJobWell.BLL.Constant;
+using MakeJobWell.Core.CrossCuttingConcerns.Validation.FluentVal;
 using MakeJobWell.Core.Utilities.Result;
 using MakeJobWell.DAL.Abstract;
 using MakeJobWell.Models.Entities;
@@ -72,13 +74,17 @@ namespace MakeJobWell.BLL.Concrete.Repositories
         #region BaseCRUD
         public IResult Add(Company entity)
         {
-            Check(entity);
+            //Check(entity);
+            FluentValidationTool.Validate(new CompanyValidator(), entity);
+
             companyDAL.Add(entity);
             return new SuccessResult(ResultMessage<Company>.Add(entity.ToString()));
         }
         public IResult Update(Company entity)
         {
-            Check(entity);
+            //Check(entity);
+            FluentValidationTool.Validate(new CompanyValidator(), entity);
+
             companyDAL.Update(entity);
             return new SuccessResult(ResultMessage<Company>.Update(entity.CompanyName));
         }
