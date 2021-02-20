@@ -5,8 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\css\adminlte.css" />
-    <Content Remove="wwwroot\css\adminlte.css.map" />
     <Content Remove="wwwroot\css\all.min.css" />
     <Content Remove="wwwroot\css\bootstrap.min.css" />
     <Content Remove="wwwroot\css\style.css" />
@@ -204,8 +202,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\css\adminlte.css" />
-    <None Include="wwwroot\css\adminlte.css.map" />
     <None Include="wwwroot\css\all.min.css" />
     <None Include="wwwroot\css\bootstrap.min.css" />
     <None Include="wwwroot\css\style.css" />
