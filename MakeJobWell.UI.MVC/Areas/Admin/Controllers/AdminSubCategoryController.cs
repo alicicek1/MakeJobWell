@@ -66,7 +66,7 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult InsertSubCategory(SubCategoryVM subCategoryVM)
         {
-            User currentAdmin = GetCurrentAdmin();
+            User currentAdmin = HttpContext.Session.Get<User>("currentUser");
             SubCategory subCategory = new SubCategory();
             if (ModelState.IsValid)
             {
@@ -90,11 +90,6 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
             return View("Index");
         }
 
-        private User GetCurrentAdmin()
-        {
-            return HttpContext.Session.Get<User>("currentUser");
-        }
-
         public IActionResult UpdateSubCategory(int id)
         {
             SubCategory subCategory = subCategoryBLL.Get(id).Data;
@@ -104,7 +99,7 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult UpdateSubCategory(SubCategoryVM subCategoryVM, int id)
         {
-            User currentAdmin = GetCurrentAdmin();
+            User currentAdmin = HttpContext.Session.Get<User>("currentUser");
             SubCategory subCategory = subCategoryBLL.Get(id).Data;
             try
             {

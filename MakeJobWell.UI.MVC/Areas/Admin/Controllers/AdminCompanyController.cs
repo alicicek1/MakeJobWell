@@ -37,11 +37,6 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
             return PartialView("_setCompanies", companies);
         }
 
-        private User GetCurrentAdmin()
-        {
-            return HttpContext.Session.Get<User>("currentUser");
-        }
-
         CompanyVM GetCompanyVM(Company company = null)
         {
             CompanyVM companyVM = new CompanyVM();
@@ -71,7 +66,7 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult InsertCompany(CompanyVM companyVM)
         {
-            User currentAdmin = GetCurrentAdmin();
+            User currentAdmin = HttpContext.Session.Get<User>("currentUser");
             Company company = new Company();
 
             if (ModelState.IsValid)
@@ -108,7 +103,7 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult UpdateCompany(CompanyVM companyVM, int id)
         {
-            User currentAdmin = GetCurrentAdmin();
+            User currentAdmin = HttpContext.Session.Get<User>("currentUser");
             Company company = companyBLL.Get(id).Data;
             try
             {
@@ -150,7 +145,7 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            User currentAdmin = GetCurrentAdmin();
+            User currentAdmin = HttpContext.Session.Get<User>("currentUser");
             try
             {
                 companyBLL.Delete(id);

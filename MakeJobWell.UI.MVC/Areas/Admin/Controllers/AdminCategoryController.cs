@@ -24,11 +24,6 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
             return View();
         }
 
-        private User GetCurrentAdmin()
-        {
-            return HttpContext.Session.Get<User>("currentUser");
-        }
-
         [HttpPost]
         public IActionResult SetCategories([FromBody] List<CategoryVM> categories)
         {
@@ -48,7 +43,7 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult InsertCategory(CategoryVM categoryVM)
         {
-            User currentAdmin = GetCurrentAdmin();
+            User currentAdmin = HttpContext.Session.Get<User>("currentUser");
             Category category = new Category
             {
                 CategoryName = categoryVM.CategoryName,
@@ -89,7 +84,7 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult UpdateCategory(CategoryVM categoryVM, int id)
         {
-            User currentAdmin = GetCurrentAdmin();
+            User currentAdmin = HttpContext.Session.Get<User>("currentUser");
             Category category = categoryBLL.Get(id).Data;
             try
             {
