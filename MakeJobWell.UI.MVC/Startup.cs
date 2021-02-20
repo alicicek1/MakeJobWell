@@ -10,7 +10,7 @@ using System;
 using Microsoft.Extensions.Configuration;
 using Hangfire;
 using Hangfire.PostgreSql;
-
+using MakeJobWell.Core.Exceptions;
 
 namespace MakeJobWell.UI.MVC
 {
@@ -29,6 +29,21 @@ namespace MakeJobWell.UI.MVC
                 option.RegisterValidatorsFromAssemblyContaining<Startup>();
             });
 
+
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new CustomHandlerExceptionFilterAttribute() { ErrorPage = "~/Views/Error/CustomError.cshtml" });
+            });
+            //services.AddHsts(options =>
+            //{
+            //    options.Preload = true;
+            //    options.IncludeSubDomains = true;
+            //    options.MaxAge = TimeSpan.FromDays(100);
+            //    options.ExcludedHosts.Add("www.localhost:59143");
+            //    options.ExcludedHosts.Add("localhost:59143");
+            //    options.ExcludedHosts.Add("http://localhost:59143");
+            //    options.ExcludedHosts.Add("http://www.localhost:59143");
+            //});
 
             services.AddHangfire(config => config.UsePostgreSqlStorage(configuration.GetConnectionString("HangFireConnection")));
 
@@ -51,7 +66,21 @@ namespace MakeJobWell.UI.MVC
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                //app.UseStatusCodePages("text/plain", "Error Status Code : {0}");
+                app.UseStatusCodePages(async context =>
+                {
+                    context.HttpContext.Response.ContentType = "text/plain";
+                    await context.HttpContext.Response.WriteAsync($" Page Not Found  ,Error Status Code : {context.HttpContext.Response.StatusCode}");
+                });
+
             }
+            else
+            {
+                //app.UseExceptionHandler("/Error/Error");
+                app.UseHsts();
+            }
+            //app.UseExceptionHandler("/Error/Error");
             app.UseSession();
             app.UseRouting();
             app.UseStaticFiles();
