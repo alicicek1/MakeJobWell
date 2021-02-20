@@ -4,6 +4,7 @@ using MakeJobWell.Models.Enum;
 using MakeJobWell.UI.MVC.Helper;
 using MakeJobWell.UI.MVC.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 
@@ -13,9 +14,11 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
     public class AdminUserController : Controller
     {
         IUserBLL userBLL;
-        public AdminUserController(IUserBLL bll)
+        private readonly ILogger _logger;
+        public AdminUserController(IUserBLL bll, ILogger<AdminCategoryController> logger)
         {
             userBLL = bll;
+            this._logger = logger;
         }
         public IActionResult Index()
         {
@@ -38,6 +41,7 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult InsertUser(UserVM userVM)
         {
+            User currentAdmin = HttpContext.Session.Get<User>("currentUser");
             try
             {
                 if (userVM.Password == userVM.PasswordRepaet)
@@ -54,7 +58,16 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
                     };
                     if (user != null)
                     {
-                        userBLL.AddAdmin(user);
+                        try
+                        {
+                            userBLL.AddAdmin(user);
+                            this._logger.LogInformation($"Current admin {currentAdmin.ID}, made ID = {user.ID} admin.");
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
                         bool result = MailHelper.SendActivationCode(user.FirstName, user.Email, user.ActivationCode);
                         if (result)
                         {
@@ -97,6 +110,7 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult UpdateUser(UserVM userVM, int id)
         {
+            User currentAdmin = HttpContext.Session.Get<User>("currentUser");
             User user = userBLL.Get(id).Data;
             try
             {
@@ -112,7 +126,16 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
                     user.Gender = userVM.Gender;
                     if (user != null)
                     {
-                        userBLL.Update(user);
+                        try
+                        {
+                            userBLL.Update(user);
+                            this._logger.LogInformation($"AdminID : {currentAdmin.ID} is updated UserID : {user.ID}.");
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
                     }
                 }
             }
@@ -125,11 +148,21 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
 
         public IActionResult MakeAdminUser(int id)
         {
+            User currentAdmin = HttpContext.Session.Get<User>("currentUser");
             User user = userBLL.Get(id).Data;
             if (user != null)
             {
                 user.UserRole = UserRole.Admin;
-                userBLL.Update(user);
+                try
+                {
+                    userBLL.Update(user);
+                    this._logger.LogInformation($"Current admin {currentAdmin.ID}, made ID = {user.ID} admin.");
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
             }
             return View("Index");
         }

@@ -4,11 +4,6 @@ using MakeJobWell.UI.MVC.Helper;
 using MakeJobWell.UI.MVC.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MakeJobWell.UI.MVC.Areas.AdminsArea.Controllers
 {

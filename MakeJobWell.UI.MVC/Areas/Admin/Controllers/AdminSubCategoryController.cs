@@ -1,8 +1,11 @@
 ﻿using MakeJobWell.BLL.Abstract.IRepositorories;
 using MakeJobWell.Models.Entities;
+using MakeJobWell.UI.MVC.Helper;
 using MakeJobWell.UI.MVC.Models.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 
@@ -13,10 +16,12 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
     {
         ICategoryBLL categoryBLL;
         ISubCategoryBLL subCategoryBLL;
-        public AdminSubCategoryController(ICategoryBLL bLL, ISubCategoryBLL sub)
+        private readonly ILogger _logger;
+        public AdminSubCategoryController(ICategoryBLL bLL, ISubCategoryBLL sub, ILogger<AdminSubCategoryController> logger)
         {
             categoryBLL = bLL;
             subCategoryBLL = sub;
+            this._logger = logger;
         }
         public IActionResult Index()
         {
@@ -61,6 +66,7 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult InsertSubCategory(SubCategoryVM subCategoryVM)
         {
+            User currentAdmin = GetCurrentAdmin();
             SubCategory subCategory = new SubCategory();
             if (ModelState.IsValid)
             {
@@ -69,10 +75,24 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
                 subCategory.CategoryID = subCategoryVM.CatID;
                 if (subCategory != null)
                 {
-                    subCategoryBLL.Add(subCategory);
+                    try
+                    {
+                        subCategoryBLL.Add(subCategory);
+                        this._logger.LogInformation($"AdminID : {currentAdmin.ID} is inserted the SubCategoryID : {subCategory.ID}.");
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
                 }
             }
             return View("Index");
+        }
+
+        private User GetCurrentAdmin()
+        {
+            return HttpContext.Session.Get<User>("currentUser");
         }
 
         public IActionResult UpdateSubCategory(int id)
@@ -84,6 +104,7 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult UpdateSubCategory(SubCategoryVM subCategoryVM, int id)
         {
+            User currentAdmin = GetCurrentAdmin();
             SubCategory subCategory = subCategoryBLL.Get(id).Data;
             try
             {
@@ -94,7 +115,16 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
                     subCategory.CategoryID = subCategoryVM.CatID;
                     if (subCategory != null)
                     {
-                        subCategoryBLL.Update(subCategory);
+                        try
+                        {
+                            subCategoryBLL.Update(subCategory);
+                            this._logger.LogInformation($"AdminID : {currentAdmin.ID} is updated  SubCategoryID : {subCategory.ID}.");
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
                     }
                 }
                 return View("Index");
