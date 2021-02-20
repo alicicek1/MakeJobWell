@@ -1,8 +1,11 @@
 ﻿using MakeJobWell.BLL.Abstract.IRepositorories;
 using MakeJobWell.Models.Entities;
+using MakeJobWell.UI.MVC.Helper;
 using MakeJobWell.UI.MVC.Models.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 
@@ -13,10 +16,12 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
     {
         ISubCategoryBLL SubCategoryBLL;
         ICompanyBLL companyBLL;
-        public AdminCompanyController(ISubCategoryBLL sub, ICompanyBLL bLL)
+        private readonly ILogger _logger;
+        public AdminCompanyController(ISubCategoryBLL sub, ICompanyBLL bLL, ILogger<AdminCompanyController> logger)
         {
             SubCategoryBLL = sub;
             companyBLL = bLL;
+            this._logger = logger;
         }
         public IActionResult Index()
         {
@@ -31,7 +36,6 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
             }
             return PartialView("_setCompanies", companies);
         }
-
 
         CompanyVM GetCompanyVM(Company company = null)
         {
@@ -62,6 +66,7 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult InsertCompany(CompanyVM companyVM)
         {
+            User currentAdmin = HttpContext.Session.Get<User>("currentUser");
             Company company = new Company();
 
             if (ModelState.IsValid)
@@ -74,7 +79,16 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
                 company.Adress = "defauladresdefauladresdefauladres";
                 if (company != null)
                 {
-                    companyBLL.Add(company);
+                    try
+                    {
+                        companyBLL.Add(company);
+                        this._logger.LogInformation($"AdminID : {currentAdmin.ID} is created  CompanyID : {company.ID}.");
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
                 }
             }
             return View("Index");
@@ -89,6 +103,7 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult UpdateCompany(CompanyVM companyVM, int id)
         {
+            User currentAdmin = HttpContext.Session.Get<User>("currentUser");
             Company company = companyBLL.Get(id).Data;
             try
             {
@@ -102,7 +117,16 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
 
                     if (company != null)
                     {
-                        companyBLL.Update(company);
+                        try
+                        {
+                            companyBLL.Update(company);
+                            this._logger.LogInformation($"AdminID : {currentAdmin.ID} is updated  CompanyID : {company.ID}.");
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
                         ViewBag.IsSuccess = true;
                     }
                 }
@@ -121,7 +145,17 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            companyBLL.Delete(id);
+            User currentAdmin = HttpContext.Session.Get<User>("currentUser");
+            try
+            {
+                companyBLL.Delete(id);
+                this._logger.LogInformation($"AdminID : {currentAdmin.ID} is updated  CompanyID : {id}.");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
             return View("Index");
         }
 

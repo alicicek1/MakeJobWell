@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Hangfire;
 using Hangfire.PostgreSql;
 using MakeJobWell.Core.Exceptions;
+using Microsoft.Extensions.Logging;
 
 namespace MakeJobWell.UI.MVC
 {
@@ -61,7 +62,7 @@ namespace MakeJobWell.UI.MVC
         }
 
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
             if (env.IsDevelopment())
             {
@@ -74,11 +75,14 @@ namespace MakeJobWell.UI.MVC
                     await context.HttpContext.Response.WriteAsync($" Page Not Found  ,Error Status Code : {context.HttpContext.Response.StatusCode}");
                 });
 
+                logger.LogInformation("In Development");
             }
             else
             {
                 //app.UseExceptionHandler("/Error/Error");
                 app.UseHsts();
+
+                logger.LogInformation("Not In Development");
             }
             //app.UseExceptionHandler("/Error/Error");
             app.UseSession();

@@ -5,6 +5,7 @@ using MakeJobWell.UI.MVC.Helper;
 using MakeJobWell.UI.MVC.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 namespace MakeJobWell.UI.MVC.Controllers
@@ -13,12 +14,15 @@ namespace MakeJobWell.UI.MVC.Controllers
     {
         IComplaintBLL complaintBLL;
         ICompanyBLL companyBLL;
+        private readonly ILogger _logger;
         private readonly IValidator<Complaint> _compValidator;
-        public ComplaintController(IComplaintBLL bLL, ICompanyBLL bLL1, IValidator<Complaint> validator)
+
+        public ComplaintController(IComplaintBLL bLL, ICompanyBLL bLL1, IValidator<Complaint> validator, ILogger<ComplaintController> logger)
         {
             complaintBLL = bLL;
             companyBLL = bLL1;
             _compValidator = validator;
+            this._logger = logger;
         }
         public IActionResult Index()
         {
@@ -101,6 +105,7 @@ namespace MakeJobWell.UI.MVC.Controllers
                     try
                     {
                         complaintBLL.Add(complaint);
+                        this._logger.LogInformation($"New complaint inserted by {currentUser.Email} and complaint id = {complaint.ID}.");
                         return RedirectToAction("Index", "Home");
                     }
                     catch (Exception)
@@ -121,7 +126,16 @@ namespace MakeJobWell.UI.MVC.Controllers
 
         public IActionResult DeleteComplaint(int id)
         {
-            complaintBLL.Delete(complaintBLL.Get(id).Data);
+            try
+            {
+                complaintBLL.Delete(complaintBLL.Get(id).Data);
+                this._logger.LogWarning($"Complaint is deleted. ID = {id} ");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
             return RedirectToAction("ProfilePage", "Profile");
         }
 

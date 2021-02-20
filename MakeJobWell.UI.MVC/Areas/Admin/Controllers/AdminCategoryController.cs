@@ -1,12 +1,11 @@
 ﻿using MakeJobWell.BLL.Abstract.IRepositorories;
 using MakeJobWell.Models.Entities;
+using MakeJobWell.UI.MVC.Helper;
 using MakeJobWell.UI.MVC.Models.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
 {
@@ -14,9 +13,11 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
     public class AdminCategoryController : Controller
     {
         ICategoryBLL categoryBLL;
-        public AdminCategoryController(ICategoryBLL bLL)
+        private readonly ILogger _logger;
+        public AdminCategoryController(ICategoryBLL bLL, ILogger<AdminCategoryController> logger)
         {
             categoryBLL = bLL;
+            this._logger = logger;
         }
         public IActionResult Index()
         {
@@ -42,6 +43,7 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult InsertCategory(CategoryVM categoryVM)
         {
+            User currentAdmin = HttpContext.Session.Get<User>("currentUser");
             Category category = new Category
             {
                 CategoryName = categoryVM.CategoryName,
@@ -49,7 +51,16 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
             };
             if (category != null)
             {
-                categoryBLL.Add(category);
+                try
+                {
+                    categoryBLL.Add(category);
+                    this._logger.LogInformation($"AdminID : {currentAdmin.ID} is created CategoryID : {category.ID}.");
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
             }
             else
             {
@@ -73,6 +84,7 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult UpdateCategory(CategoryVM categoryVM, int id)
         {
+            User currentAdmin = HttpContext.Session.Get<User>("currentUser");
             Category category = categoryBLL.Get(id).Data;
             try
             {
@@ -83,7 +95,16 @@ namespace MakeJobWell.UI.MVC.Areas.Admin.Controllers
 
                     if (category != null)
                     {
-                        categoryBLL.Update(category);
+                        try
+                        {
+                            categoryBLL.Update(category);
+                            this._logger.LogInformation($"AdminID : {currentAdmin.ID} is updated CategoryID : {category.ID}");
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
                         ViewBag.IsSuccess = true;
                     }
                 }

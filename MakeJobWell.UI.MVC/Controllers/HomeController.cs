@@ -3,6 +3,7 @@ using MakeJobWell.UI.MVC.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,15 @@ namespace MakeJobWell.UI.MVC.Controllers
     public class HomeController : Controller
     {
         //[CustomHandlerExceptionFilterAttribute(ErrorPage = "~/Views/Error/CustomError.cshtml")]
+
+        private readonly ILogger<HomeController> _logger;
+        public HomeController(ILogger<HomeController> logger)
+        {
+            this._logger = logger;
+        }
         public IActionResult Index()
         {
+            this._logger.LogInformation("Index page has been entered...");
             return View();
         }
 

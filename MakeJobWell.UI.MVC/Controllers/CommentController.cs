@@ -3,6 +3,7 @@ using MakeJobWell.Models.Entities;
 using MakeJobWell.UI.MVC.Helper;
 using MakeJobWell.UI.MVC.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,11 @@ namespace MakeJobWell.UI.MVC.Controllers
     public class CommentController : Controller
     {
         ICommentBLL commentBLL;
-        public CommentController(ICommentBLL bLL)
+        ILogger _logger;
+        public CommentController(ICommentBLL bLL, ILogger<CommentController> logger)
         {
             commentBLL = bLL;
+            this._logger = logger;
         }
         public IActionResult SetComplaints([FromBody] List<CommentVM> comments)
         {
@@ -28,7 +31,7 @@ namespace MakeJobWell.UI.MVC.Controllers
             User currenUser = HttpContext.Session.Get<User>("currentUser");
             if (currenUser == null)
             {
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index", "Home");
             }
             Comment comment = new Comment()
             {
@@ -39,7 +42,16 @@ namespace MakeJobWell.UI.MVC.Controllers
 
             if (comment != null)
             {
-                commentBLL.Add(comment);
+                try
+                {
+                    commentBLL.Add(comment);
+                    this._logger.LogInformation($"New comment inserted by {currenUser.FirstName}.");
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
             }
 
             return View();

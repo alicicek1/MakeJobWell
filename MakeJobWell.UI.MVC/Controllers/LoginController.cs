@@ -7,6 +7,7 @@ using MakeJobWell.UI.MVC.Models.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -17,10 +18,13 @@ namespace MakeJobWell.UI.MVC.Controllers
     {
         IUserBLL userBLL;
         IEmailSender emailSender;
-        public LoginController(IUserBLL bll, IEmailSender sender)
+        private readonly ILogger _logger;
+
+        public LoginController(IUserBLL bll, IEmailSender sender, ILogger<LoginController> logger)
         {
             userBLL = bll;
             emailSender = sender;
+            this._logger = logger;
         }
         public IActionResult CreateAccount()
         {
@@ -42,7 +46,16 @@ namespace MakeJobWell.UI.MVC.Controllers
 
                     if (user != null)
                     {
-                        userBLL.Add(user);
+                        try
+                        {
+                            userBLL.Add(user);
+                            _logger.LogInformation($"User who has  ID = {user.ID} is created.");
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
                     }
 
                     bool result = MailHelper.SendActivationCode(user.FirstName, user.Email, user.ActivationCode);
@@ -59,7 +72,7 @@ namespace MakeJobWell.UI.MVC.Controllers
                 }
                 else
                 {
-                    ViewBag.Password = "Passwords do not match."; 
+                    ViewBag.Password = "Passwords do not match.";
                     return View();
                 }
 
@@ -79,7 +92,16 @@ namespace MakeJobWell.UI.MVC.Controllers
             if (newUser != null)
             {
                 newUser.IsActive = true;
-                userBLL.Update(newUser);
+                try
+                {
+                    userBLL.Update(newUser);
+                    this._logger.LogInformation($"UserID = {newUser.ID} is activated");
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
                 return RedirectToAction("Index");
             }
             else
