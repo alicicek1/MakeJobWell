@@ -1,5 +1,7 @@
 ﻿using MakeJobWell.BLL.Abstract.IRepositorories;
+using MakeJobWell.BLL.Concrete.EntityValidation;
 using MakeJobWell.BLL.Constant;
+using MakeJobWell.Core.CrossCuttingConcerns.Validation.FluentVal;
 using MakeJobWell.Core.Utilities.Result;
 using MakeJobWell.DAL.Abstract;
 using MakeJobWell.Models.Entities;
@@ -45,12 +47,16 @@ namespace MakeJobWell.BLL.Concrete.Repositories
         public IResult Add(SubCategory entity)
         {
             Check(entity);
+            FluentValidationTool.Validate(new SubCategoryValidator(), entity);
+
             subCategoryDAL.Add(entity);
             return new SuccessResult(ResultMessage<SubCategory>.Add(entity.ToString()));
         }
         public IResult Update(SubCategory entity)
         {
             Check(entity);
+            FluentValidationTool.Validate(new SubCategoryValidator(), entity);
+
             subCategoryDAL.Update(entity);
             return new SuccessResult(ResultMessage<SubCategory>.Update(entity.CategoryName));
         }

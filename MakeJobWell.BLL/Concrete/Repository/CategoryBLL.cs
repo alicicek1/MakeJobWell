@@ -1,5 +1,8 @@
 ﻿using MakeJobWell.BLL.Abstract.IRepositorories;
+using MakeJobWell.BLL.Concrete.EntityValidation;
 using MakeJobWell.BLL.Constant;
+using MakeJobWell.Core.Aspects.Autofac.Validation;
+using MakeJobWell.Core.CrossCuttingConcerns.Validation.FluentVal;
 using MakeJobWell.Core.Utilities.Result;
 using MakeJobWell.DAL.Abstract;
 using MakeJobWell.Models.Entities;
@@ -42,15 +45,20 @@ namespace MakeJobWell.BLL.Concrete.Repository
         #endregion
 
         #region BaseCRUD
+        [ValidationAspect(typeof(CategoryValidator))]
         public IResult Add(Category entity)
         {
-            Check(entity);
+            //Check(entity);
+            FluentValidationTool.Validate(new CategoryValidator(), entity);
+
             categoryDAL.Add(entity);
             return new SuccessResult(ResultMessage<Category>.Add(entity.CategoryName));
         }
         public IResult Update(Category entity)
         {
-            Check(entity);
+            //Check(entity);
+            FluentValidationTool.Validate(new CategoryValidator(), entity);
+
             categoryDAL.Update(entity);
             return new SuccessResult(ResultMessage<Category>.Update(entity.CategoryName));
         }

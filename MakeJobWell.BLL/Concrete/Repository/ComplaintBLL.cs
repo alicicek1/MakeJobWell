@@ -1,5 +1,7 @@
 ﻿using MakeJobWell.BLL.Abstract.IRepositorories;
+using MakeJobWell.BLL.Concrete.EntityValidation;
 using MakeJobWell.BLL.Constant;
+using MakeJobWell.Core.CrossCuttingConcerns.Validation.FluentVal;
 using MakeJobWell.Core.Utilities.Result;
 using MakeJobWell.DAL.Abstract;
 using MakeJobWell.Models.Entities;
@@ -47,13 +49,17 @@ namespace MakeJobWell.BLL.Concrete.Repositories
         #region BaseCRUD
         public IResult Add(Complaint entity)
         {
-            Check(entity);
+            //Check(entity);
+            FluentValidationTool.Validate(new ComplaintValidator(), entity);
+
             complaintDAL.Add(entity);
             return new SuccessResult(ResultMessage<Complaint>.Add(entity.ToString()));
         }
         public IResult Update(Complaint entity)
         {
-            Check(entity);
+            //Check(entity);
+            FluentValidationTool.Validate(new ComplaintValidator(), entity);
+
             complaintDAL.Update(entity);
             return new SuccessResult(ResultMessage<Complaint>.Update(entity.ComplaintTitle));
         }
@@ -65,8 +71,7 @@ namespace MakeJobWell.BLL.Concrete.Repositories
             return new SuccessResult(ResultMessage<Complaint>.Delete(entity.ComplaintTitle));
         }
 
-        public IResult
-            Delete(int id)
+        public IResult Delete(int id)
         {
             Complaint complaint = Get(id).Data;
             complaint.IsActive = false;
