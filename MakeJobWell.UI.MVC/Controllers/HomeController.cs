@@ -1,4 +1,7 @@
-﻿using MakeJobWell.UI.MVC.Models.ViewModels;
+﻿using MakeJobWell.Core.Exceptions;
+using MakeJobWell.UI.MVC.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,10 +12,12 @@ namespace MakeJobWell.UI.MVC.Controllers
 {
     public class HomeController : Controller
     {
+        //[CustomHandlerExceptionFilterAttribute(ErrorPage = "~/Views/Error/CustomError.cshtml")]
         public IActionResult Index()
         {
             return View();
         }
+
         [HttpPost]
         public IActionResult SetAllCategories([FromBody] List<CategoryVM> categories)
         {
